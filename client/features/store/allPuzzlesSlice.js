@@ -7,10 +7,10 @@ const initialState = [];
 //async thunk communicates with db to retrieve all puzzles
 export const fetchPuzzles = createAsyncThunk('allPuzzles', async () => {
     try {
-        const { data } = await axios.get(`api/puzzles`);
+        const { data } = await axios.get(`/api/puzzles`);
         return data;
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 });
 
