@@ -1,18 +1,21 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Order = db.define('order', {
-    date: {
-        type: Sequelize.DATE,
-        allowNullL: false
+const Order = db.define("order", {
+  date: {
+    type: Sequelize.DATE,
+    allowNullL: false,
+  },
+  orderTotal: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    validate: {
+      min: 0,
     },
-    orderQTY: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
-    status: {
-        type: Sequelize.ENUM('PENDING', 'ORDERED')
-    }
-})
+  },
+  status: {
+    type: Sequelize.ENUM("PENDING", "ORDERED"),
+  },
+});
 
 module.exports = Order;
