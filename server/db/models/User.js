@@ -1,4 +1,5 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+//import { DataTypes } from '@sequelize/core';
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
@@ -8,11 +9,31 @@ const SALT_ROUNDS = 5;
 const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    },
     unique: true,
     allowNull: false
   },
   password: {
     type: Sequelize.STRING,
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  userType: {
+    type: Sequelize.ENUM('ADMIN', 'CUSTOMER')
+    //A 'CUSTOMER' could be a logged in user or a guest
+    //Differentiated by whether or not a password exists
   }
 })
 
