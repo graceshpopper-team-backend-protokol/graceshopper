@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from 'react-router-dom';
-import { fetchSinglePuzzle, selectSinglePuzzle } from "../store/singlePuzzleSlice";
-import styles from "../styles/PuzzleDetail.module.css"
+import { useParams } from "react-router-dom";
+import {
+  fetchSinglePuzzle,
+  selectSinglePuzzle,
+} from "../store/singlePuzzleSlice";
+import styles from "../styles/PuzzleDetail.module.css";
 
 //add AddToCartHandler function and button onClick
 
@@ -16,15 +19,16 @@ const PuzzleDetail = () => {
   }, [dispatch, id]);
 
   const QuantityDropDown = () => {
-    let QuantOpts = []
+    let QuantOpts = [];
     for (let i = 1; i <= puzzle?.stockQuantity; i++) {
       QuantOpts.push(i);
-    } return QuantOpts
     }
+    return QuantOpts;
+  };
 
   return (
     <div className={styles.container}>
-      <img className={styles.img} src={puzzle.imgUrl}/>
+      <img className={styles.img} src={puzzle.imgURL} />
       <div className={styles.text}>
         <h1 className={styles.title}>{puzzle.name}</h1>
         <p>{puzzle.puzzlePieces}</p>
@@ -34,14 +38,16 @@ const PuzzleDetail = () => {
         <select className={styles.quantity}>
           {QuantityDropDown().map((num) => {
             return (
-              <option value={num} id={num}>{num}</option>
-            )
+              <option value={num} id={num}>
+                {num}
+              </option>
+            );
           })}
         </select>
         <button>Add to Cart</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PuzzleDetail;
