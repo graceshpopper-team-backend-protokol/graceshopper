@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Order },
+  models: { User, Order, OrderItem },
 } = require("../db");
 module.exports = router;
 
@@ -35,7 +35,14 @@ router.post("/new", async (req, res, next) => {
   }
 });
 
-router.put("/edit/:id")
+router.put("/:id/edit", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(await user.update(req.body));
+  } catch (err) {
+    next (err);
+  }
+})
 
 router.get("/:id/cart", async (req, res, next) => {
   try {
@@ -54,13 +61,15 @@ router.get("/:id/cart", async (req, res, next) => {
 // update route for cart - removing, editing or adding elements
 router.put("/:id/cart", async (req, res, next) => {
   try {
+    const { productId } = req.body;
     const user = await User.findByPk(req.params.id);
     const cart = await user.getOrders({
       where: {
         status: "PENDING",
       },
     });
-    res.json(await cart.update(req.body));
+    const orderLineItem = await cart.getOrderItem({ where: { id: productId } });
+    res.json(await orderLineItem.update(req.body));
   } catch (err) {
     next(err);
   }

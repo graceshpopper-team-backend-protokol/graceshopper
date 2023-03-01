@@ -26,9 +26,8 @@ async ({username, password, firstName, lastName, address}) => {
     return data;
 });
 
-export 
 
-const allUsersSlice = createSlice({
+export const allUsersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {},
@@ -43,8 +42,6 @@ const allUsersSlice = createSlice({
     },
 });
 
-export const selectUsers = (state) => {
-    return state.users;
-};
+export const selectUsers = (state) => state.users;
 
 export default allUsersSlice.reducer;

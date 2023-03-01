@@ -11,7 +11,7 @@ const PuzzleCard = ({ puzzle }) => {
         <p>{puzzle.price}</p>
       </div>
       <button>
-        <span class="material-symbols-outlined">add_shopping_cart</span>
+        <span className="material-symbols-outlined">add_shopping_cart</span>
       </button>
     </div>
   );
