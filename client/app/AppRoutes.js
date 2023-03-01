@@ -4,8 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
 import { me } from './store';
+import { User, Puzzle } from '../features/components/index'
+import { fetchPuzzles } from '../features/store/allPuzzlesSlice';
+import { fetchUsers } from '../features/store/allUsersSlice';
 
-//This is need to be updated with AccountForm - Sarah
+//This will need to be updated with AccountForm - Sarah
 /**
  * COMPONENT
  */
@@ -20,14 +23,11 @@ const AppRoutes = () => {
 
   return (
     <div>
-      <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-      </Routes>
-      {/* {isLoggedIn ? (
+      {true ? (
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
+          <Route to='/users' element={<User />} />
         </Routes>
       ) : (
         <Routes>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from "../store/allPuzzlesSlice";
 import PuzzleCard from "../components/PuzzleCard";
+import styles from "../styles/AllPuzzles.module.css"
 
 
 const AllPuzzles = () => {

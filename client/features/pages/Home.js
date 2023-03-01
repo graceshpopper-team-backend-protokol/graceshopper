@@ -2,18 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import AllPuzzles from './AllPuzzles'
+import AllPuzzles from './AllPuzzles'
 /**
- * COMPONENT
- */
+* COMPONENT
+*/
 const Home = (props) => {
-  const username = useSelector((state) => state.auth.me.username);
+const username = useSelector((state) => state.auth.me.username);
 
-  return (
-    <div>
-      <h3>Welcome, {username}</h3>
-      <section><AllPuzzles /></section>
-    </div>
-  );
+return (
+<div>
+<h3>Welcome, {username}</h3>
+<section><AllPuzzles /></section>
+</div>
+);
 };
 
 export default Home;
