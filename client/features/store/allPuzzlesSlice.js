@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //initialize empty array to put puzzles in
-const initialState = [];
 
 //async thunk communicates with db to retrieve all puzzles
-export const fetchPuzzles = createAsyncThunk('allPuzzles', async () => {
+export const fetchPuzzles = createAsyncThunk('puzzles/allPuzzles', async () => {
     try {
         const { data } = await axios.get(`/api/puzzles`);
         return data;
@@ -16,7 +15,7 @@ export const fetchPuzzles = createAsyncThunk('allPuzzles', async () => {
 
 export const allPuzzlesSlice = createSlice({
     name: 'puzzles',
-    initialState,
+    initialState: [],
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchPuzzles.fulfilled, (state, action) => {
