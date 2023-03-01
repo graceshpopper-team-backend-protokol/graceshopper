@@ -14,7 +14,7 @@ export const fetchPuzzles = createAsyncThunk('allPuzzles', async () => {
     }
 });
 
-const allPuzzlesSlice = createSlice({
+export const allPuzzlesSlice = createSlice({
     name: 'puzzles',
     initialState,
     reducers: {},

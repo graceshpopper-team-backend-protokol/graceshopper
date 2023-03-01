@@ -6,8 +6,7 @@ const initialState = {
 };
 
 //async thunk communicates with db to get user with matching ID
-export const fetchSingleUser = createAsyncThunk(
-    "singleUser",
+export const fetchSingleUser = createAsyncThunk("singleUser",
     async (id) => {
         try {
             const { data } = await axios.get(`/api/users/${id}`);
@@ -18,7 +17,7 @@ export const fetchSingleUser = createAsyncThunk(
     }
 );
 
-const singleUserSlice = createSlice({
+export const singleUserSlice = createSlice({
     name: "singleUser",
     initialState,
     reducers: {},
@@ -27,7 +26,7 @@ const singleUserSlice = createSlice({
             .addCase(fetchSingleUser.fulfilled, (state, action) => {
                 state.info = action.payload;
             })
-            }
+        }
 });
 
 export const selectSingleUser = (state) => {
