@@ -15,6 +15,7 @@ const {
 function createUserArray(n) {
   let userArray = [];
   userArray.push(createAdmin());
+  userArray.push(createTestUser());
   for (let i = 1; i < n; i++) {
     userArray.push(createUser());
   }
@@ -66,21 +67,40 @@ function createAdmin() {
   };
 }
 
-async function userSeed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
+/**
+ * @returns a test user object to test user login
+ */
+function createTestUser() {
+  const password = "test123";
+  const firstName = "Grace";
+  const lastName = "Tester";
+  const username = "graceshopper@tester.com";
+  const address = "100 testing road";
+  const userType = "CUSTOMER";
 
+  return {
+    username,
+    password,
+    firstName,
+    lastName,
+    address,
+    userType,
+  };
+}
+
+/**
+ * bulkcreates users in the database
+ * @returns users
+ */
+async function userSeed() {
   // Creating Users
   const numUsers = 100;
   const userArray = createUserArray(numUsers);
   const users = await User.bulkCreate(userArray);
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded successfully`);
   return {
     users,
   };
 }
-
-userSeed();
 
 module.exports = userSeed;
