@@ -43,5 +43,6 @@ export const allUsersSlice = createSlice({
 });
 
 export const selectUsers = (state) => state.users;
+export const selectUsers = (state) => state.users;
 
 export default allUsersSlice.reducer;
