@@ -18,8 +18,13 @@ module.exports = {
       },
       {
         test: /\.(css)$/,
+<<<<<<< HEAD
         use: ["style-loader", "css-loader"],
       },
+=======
+        use: ['style-loader', 'css-loader'],
+      }
+>>>>>>> d22441e26869ef67a098035c2265e96da1b6d751
     ],
   },
 };
