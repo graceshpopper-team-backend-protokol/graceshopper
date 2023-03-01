@@ -25,7 +25,7 @@ const Puzzle = db.define("puzzle", {
     allowNull: false,
   },
   price: {
-    type: Sequelize.ENUM(['$12.99', '$15.99', '$19.99']),
+    type: Sequelize.DECIMAL(10,2),
     allowNull: false,
   },
 });

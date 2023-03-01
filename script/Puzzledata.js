@@ -9,11 +9,10 @@ for (let i = 0; i < 50; i ++) {
         description: faker.lorem.paragraph(),
         stockQuantity: faker.datatype.number({min: 0}),
         puzzlePieces: faker.helpers.arrayElement(['250 pieces','500 pieces', '1000 pieces']),
-        price:  {
+        price: faker.helpers.arrayElement(['$12.99', '$15.99', '$19.99']),
           //if puzzlePieces = 250 pieces, return $12.99  
           //if puzzlePieces = 500 pieces, return $15.99 
           //if puzzlePieces = 1000 pieces, return $19.99 
-        },
         imgURL: 'https://picsum.photos/200',
     }
     puzzles.push(newPuzzle)
