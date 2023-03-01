@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import PuzzleCard from "../components/PuzzleCard";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from "../store/allPuzzlesSlice";
-import PuzzleCard from "../components/PuzzleCard";
+
 
 
 const AllPuzzles = () => {
   const dispatch = useDispatch();
   const puzzles = useSelector(selectPuzzles);
-
+  console.log(`from useSelector: ${puzzles}`)
+ 
   useEffect(() => {
     dispatch(fetchPuzzles());
   }, [dispatch]);
@@ -16,7 +19,7 @@ const AllPuzzles = () => {
     <div>
       <h1>All Puzzles</h1>
       <div className="puzzles">
-        {puzzles.map((puzzle) => {
+        {puzzles?.map((puzzle) => {
           return (
             <PuzzleCard key={puzzle.id} id={puzzle.id} puzzle={puzzle} />
           );

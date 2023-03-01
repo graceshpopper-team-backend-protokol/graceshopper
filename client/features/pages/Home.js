@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import AllPuzzles from './AllPuzzles'
 /**
  * COMPONENT
  */
@@ -10,6 +11,7 @@ const Home = (props) => {
   return (
     <div>
       <h3>Welcome, {username}</h3>
+      <section><AllPuzzles /></section>
     </div>
   );
 };

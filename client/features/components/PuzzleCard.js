@@ -7,7 +7,7 @@ const PuzzleCard = ({ puzzle }) => {
       <img src={puzzle.imgUrl} />
       <div className="cardText">
         <h1>{puzzle.name}</h1>
-        <p>{puzzle.pieces}</p>
+        <p>{puzzle.puzzlePieces}</p>
         <p>{puzzle.price}</p>
       </div>
       <button>
