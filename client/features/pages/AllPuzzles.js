@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from "../store/allPuzzlesSlice";
 import PuzzleCard from "../components/PuzzleCard";
+import styles from "../styles/AllPuzzles/module.css"
 
 
 const AllPuzzles = () => {
@@ -13,10 +14,10 @@ const AllPuzzles = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>All Puzzles</h1>
-      <div className="puzzles">
-        {puzzles.map((puzzle) => {
+      <div className={styles.puzzleMap}>
+        {puzzles?.map((puzzle) => {
           return (
             <PuzzleCard key={puzzle.id} id={puzzle.id} puzzle={puzzle} />
           );
