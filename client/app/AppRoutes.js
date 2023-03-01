@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
+import  AllUsers from '../features/pages/AllUsers';
 import { me } from './store';
 
 //This is need to be updated with AccountForm - Sarah
@@ -39,6 +40,7 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route to="/home" element={<Home />} />
         </Routes>
       )}
     </div>

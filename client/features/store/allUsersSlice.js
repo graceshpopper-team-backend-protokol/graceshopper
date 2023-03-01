@@ -14,6 +14,20 @@ export const fetchUsers = createAsyncThunk('allUsers', async () => {
     }
 });
 
+export const addUser = createAsyncThunk("users/addUser", 
+async ({username, password, firstName, lastName, address}) => {
+    const { data } = await axios.post('/api/users/new', {
+        username,
+        password, 
+        firstName, 
+        lastName, 
+        address
+    });
+    return data;
+});
+
+export 
+
 const allUsersSlice = createSlice({
     name: 'users',
     initialState,
@@ -23,6 +37,9 @@ const allUsersSlice = createSlice({
             //add users to state array
             return action.payload;
         });
+        builder.addCase(addUser.fulfilled, (state, action) => {
+            state.push(action.payload);
+        })
     },
 });
 
