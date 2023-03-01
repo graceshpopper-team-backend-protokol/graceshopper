@@ -5,6 +5,7 @@ import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
 import { me } from './store';
 
+//This is need to be updated with AccountForm - Sarah
 /**
  * COMPONENT
  */
