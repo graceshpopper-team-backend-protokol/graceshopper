@@ -25,3 +25,5 @@ const AllUsers = () => {
     </div>
   )
 }
+
+export default AllUsers;
