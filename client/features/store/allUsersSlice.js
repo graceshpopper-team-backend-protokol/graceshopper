@@ -26,7 +26,6 @@ async ({username, password, firstName, lastName, address}) => {
     return data;
 });
 
-
 export const allUsersSlice = createSlice({
     name: 'users',
     initialState,
