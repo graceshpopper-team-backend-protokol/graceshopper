@@ -70,3 +70,18 @@ router.delete("/:id/cart", async (req, res, next) => {
     next(err);
   }
 });
+
+// update route for cart - update cart from cart status to order status
+router.put("/:id/cart/checkout", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    const cart = await user.getOrders({
+      where: {
+        status: "PENDING",
+      },
+    });
+    res.json(await cart.update({ status: "ORDERED" }));
+  } catch (err) {
+    next(err);
+  }
+});
