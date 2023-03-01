@@ -18,9 +18,14 @@ const Puzzle = db.define("puzzle", {
   },
   imgURL: {
     type: Sequelize.STRING,
+    defaultValue: 'https://picsum.photos/200'
+  },
+  puzzlePieces: {
+    type: Sequelize.ENUM(['250 pieces', '500 pieces', '1000 pieces']),
+    allowNull: false,
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.ENUM(['$12.99', '$15.99', '$19.99']),
     allowNull: false,
   },
 });
