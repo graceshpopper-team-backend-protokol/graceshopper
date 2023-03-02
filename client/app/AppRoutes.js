@@ -10,7 +10,6 @@ import { fetchUsers } from '../features/store/allUsersSlice';
 import { fetchSingleUser, selectSingleUser } from '../features/store/singleUserSlice';
 import { Protected } from './Admin/Protected'
 
-//This will need to be updated with AccountForm - Sarah
 /**
  * COMPONENT
  */
@@ -27,31 +26,35 @@ const AppRoutes = () => {
 
   return (
     <div>
-      {true ? (
+      {isLoggedIn ? (
         <Routes>
+          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
-          <Route to='/users' element={<User />} />
+          <Route to="/users" element={<AllUsers />} />
         </Routes>
       ) : (
         <Routes>
           <Route
             path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
+            element={<Login name="login" displayName="Login" />}
           />
           <Route
             path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
+            element={<Login name="login" displayName="Login" />}
           />
           <Route
             path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
+            element={<Signup name="signup" displayName="Sign Up" />}
           />
+
           <Route path="/Dashboard"
             element={<Protected isAdmin={isAdmin}>
               <Dashboard />
               </Protected>}
           />
+          
+          <Route to="/home" element={<Home />} />
         </Routes>
       )} 
     </div>

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Order, OrderItem },
+  models: { User },
 } = require("../db");
 module.exports = router;
 
@@ -27,62 +27,18 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/:id/cart", async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.params.id);
-    const cart = await user.getOrders({
-      where: {
-        status: "PENDING",
-      },
-    });
-    res.json(cart);
-  } catch (err) {
-    next(err);
-  }
-});
+// router.post("/new", async (req, res, next) => {
+//   try {
+//     res.status(201).send(await User.create(req.body));
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
-// update route for cart - removing, editing or adding elements
-router.put("/:id/cart", async (req, res, next) => {
-  try {
-    const { productId } = req.body;
-    const user = await User.findByPk(req.params.id);
-    const cart = await user.getOrders({
-      where: {
-        status: "PENDING",
-      },
-    });
-    const orderLineItem = await cart.getOrderItem({ where: { id: productId } });
-    res.json(await orderLineItem.update(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
-
-// delete route for cart = allows us to clear the cart
-router.delete("/:id/cart", async (req, res, next) => {
+router.put("/:id/edit", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    const cart = await user.getOrders({
-      where: {
-        status: "PENDING",
-      },
-    });
-    res.send(await cart.destroy());
-  } catch (err) {
-    next(err);
-  }
-});
-
-// update route for cart - update cart from cart status to order status
-router.put("/:id/cart/checkout", async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.params.id);
-    const cart = await user.getOrders({
-      where: {
-        status: "PENDING",
-      },
-    });
-    res.json(await cart.update({ status: "ORDERED" }));
+    res.send(await user.update(req.body));
   } catch (err) {
     next(err);
   }
