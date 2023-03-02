@@ -1,15 +1,18 @@
 "use strict";
 const userSeed = require("./userData");
 const seedPuzzles = require("./Puzzledata");
+const orderSeed = require("./orderData");
 
 /**
  * seed - this function seeds the database with users and puzzles
  */
 async function seed() {
   // Creating Users
-  userSeed();
+  await userSeed();
   // creating puzzles
-  seedPuzzles();
+  await seedPuzzles();
+  // creating orders
+  await orderSeed();
   console.log(`seeded successfully`);
 }
 
