@@ -4,7 +4,7 @@ import { authenticate } from '../../app/store';
 import { Link } from "react-router-dom";
 
 const AccountForm = (props) => {
-    const { name, displayName, handleSubmit} = props;
+    const { name, displayName, handleSubmit, error} = props;
 
     return (
         <div className="signInUpPage">

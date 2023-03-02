@@ -16,7 +16,7 @@ export const fetchOrderItems = createAsyncThunk(
 
 // add order items for a logged in user
 export const addOrderItems = createAsyncThunk(
-  "fetchOrderItems",
+  "addOrderItems",
   async (orderInfo) => {
     try {
       const { data } = await axios.post(`/api/cart/${orderInfo.id}`, orderInfo);

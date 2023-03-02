@@ -27,13 +27,13 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/new", async (req, res, next) => {
-  try {
-    res.status(201).send(await User.create(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
+// router.post("/new", async (req, res, next) => {
+//   try {
+//     res.status(201).send(await User.create(req.body));
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.put("/:id/edit", async (req, res, next) => {
   try {
