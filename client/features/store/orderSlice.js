@@ -44,7 +44,7 @@ export const clearOrderItems = createAsyncThunk(
 );
 
 // create order from order items in cart for a logged in user
-export const createOrderfromOrderItems = createAsyncThunk(
+export const createOrderFromOrderItems = createAsyncThunk(
   "createOrder",
   async (id) => {
     try {
@@ -61,7 +61,7 @@ export const orderSlice = createSlice({
   initialState: [],
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCartItems.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchOrderItems.fulfilled, (state, { payload }) => {
       return payload;
     });
     builder.addCase(updateOrderItem.fulfilled, (state, { payload }) => {
@@ -70,6 +70,9 @@ export const orderSlice = createSlice({
     builder.addCase(clearOrderItems.fulfilled, (state, { payload }) => {
       return [];
     });
+    builder.addCase(createOrderFromOrderItems.fulfilled, (state, { payload }) => {
+      return payload;
+    })
   },
 });
 

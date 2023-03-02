@@ -18,7 +18,7 @@ export const fetchSinglePuzzle = createAsyncThunk(
     }
 );
 
-const singlePuzzleSlice = createSlice({
+export const singlePuzzleSlice = createSlice({
     name: "singlePuzzle",
     initialState,
     reducers: {},
@@ -27,7 +27,7 @@ const singlePuzzleSlice = createSlice({
             .addCase(fetchSinglePuzzle.fulfilled, (state, action) => {
                 state.info = action.payload;
             })
-            }
+        }
 });
 
 export const selectSinglePuzzle = (state) => {
