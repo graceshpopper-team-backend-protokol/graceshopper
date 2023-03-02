@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 const PuzzleCard = ({ puzzle }) => {
   return (
     <div className="cardContainer">
-      <Link to={`/puzzles/${puzzle.id}`}>
-        <img src={puzzle.imgURL} />
-        <div className="cardText">
-          <h1>{puzzle.name}</h1>
-          <p>{puzzle.puzzlePieces}</p>
-          <p>{puzzle.price}</p>
-        </div>
-      </Link>
+    <Link to={`/puzzles/${puzzle.id}`}>
+      <img src={puzzle.imgUrl} />
+      <div className="cardText">
+        <h1>{puzzle.name}</h1>
+        <p>{puzzle.puzzlePieces}</p>
+        <p>{puzzle.price}</p>
+      </div>
+       </Link>
       <button>
         <span className="material-symbols-outlined">add_shopping_cart</span>
       </button>

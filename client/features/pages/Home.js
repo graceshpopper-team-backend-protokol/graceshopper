@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import AllPuzzles from './AllPuzzles'
+import AllPuzzles from './AllPuzzles'
 /**
 * COMPONENT
 */
