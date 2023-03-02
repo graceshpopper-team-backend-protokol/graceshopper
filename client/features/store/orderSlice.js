@@ -27,6 +27,19 @@ export const addOrderItems = createAsyncThunk(
   }
 );
 
+// edit order items for a logged in user
+export const editOrderItems = createAsyncThunk(
+  "fetchOrderItems",
+  async (orderInfo) => {
+    try {
+      const { data } = await axios.put(`/api/cart/${orderInfo.id}`, orderInfo);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const orderSlice = createSlice({
   name: "order",
   initialState: [],
@@ -36,7 +49,10 @@ export const orderSlice = createSlice({
       return payload;
     });
     builder.addCase(addOrderItems.fulfilled, (state, { payload }) => {
-      state.push(payload);
+      return payload;
+    });
+    builder.addCase(editOrderItems.fulfilled, (state, { payload }) => {
+      return payload;
     });
   },
 });
