@@ -16,7 +16,7 @@ export const fetchOrderItems = createAsyncThunk(
 
 // add order items for a logged in user
 export const addOrderItems = createAsyncThunk(
-  "fetchOrderItems",
+  "addOrderItems",
   async (orderInfo) => {
     try {
       const { data } = await axios.post(`/api/cart/${orderInfo.id}`, orderInfo);
@@ -29,7 +29,7 @@ export const addOrderItems = createAsyncThunk(
 
 // edit order items for a logged in user
 export const editOrderItems = createAsyncThunk(
-  "fetchOrderItems",
+  "editOrderItems",
   async (orderInfo) => {
     try {
       const { data } = await axios.put(`/api/cart/${orderInfo.id}`, orderInfo);
@@ -42,10 +42,23 @@ export const editOrderItems = createAsyncThunk(
 
 // deletes order items for a logged in user
 export const deleteOrderItems = createAsyncThunk(
-  "fetchOrderItems",
+  "deleteOrderItems",
   async (id) => {
     try {
       const { data } = await axios.put(`/api/cart/${id}`);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+// create order from order items in cart for a logged in user
+export const createOrderFromOrderItems = createAsyncThunk(
+  "createOrder",
+  async (id) => {
+    try {
+      const { data } = await axios.put(`/api/cart/checkout/${id}`);
       return data;
     } catch (error) {
       console.error(error);
@@ -70,6 +83,12 @@ export const orderSlice = createSlice({
     builder.addCase(deleteOrderItems.fulfilled, (state, { payload }) => {
       return [];
     });
+    builder.addCase(
+      createOrderFromOrderItems.fulfilled,
+      (state, { payload }) => {
+        return [];
+      }
+    );
   },
 });
 

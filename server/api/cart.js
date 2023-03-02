@@ -205,3 +205,18 @@ router.delete("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+// update cart from cart status to order status
+router.put("/checkout/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        status: "PENDING",
+        userId: req.params.id,
+      },
+    });
+    res.json(await cart.update({ status: "ORDERED" }));
+  } catch (err) {
+    next(err);
+  }
+});
