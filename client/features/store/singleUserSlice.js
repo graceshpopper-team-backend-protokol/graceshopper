@@ -32,7 +32,7 @@ export const editUser = createAsyncThunk(
     } catch (err) {
       console.log(err);
     }
-  })
+  });
 
 
 export const singleUserSlice = createSlice({

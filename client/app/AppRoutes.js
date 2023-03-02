@@ -47,7 +47,7 @@ const AppRoutes = () => {
           />
           <Route to="/home" element={<Home />} />
         </Routes>
-      )}
+      )} */}
     </div>
   );
 };
