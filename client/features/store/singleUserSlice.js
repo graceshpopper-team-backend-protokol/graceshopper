@@ -34,6 +34,7 @@ export const editUser = createAsyncThunk(
     }
   });
 
+
 export const singleUserSlice = createSlice({
   name: "singleUser",
   initialState,
