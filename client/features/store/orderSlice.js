@@ -6,49 +6,7 @@ export const fetchOrderItems = createAsyncThunk(
   "fetchOrderItems",
   async (id) => {
     try {
-      const { data } = await axios.get(`/api/users/${id}/cart`);
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-// remove, add or edit order item for a logged in user
-export const updateOrderItem = createAsyncThunk(
-  "updateOrderItem",
-  async (orderInfo) => {
-    try {
-      const { data } = await axios.put(
-        `/api/users/${orderInfo.id}/cart`,
-        orderInfo
-      );
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-// clear order items from cart for a logged in user
-export const clearOrderItems = createAsyncThunk(
-  "clearOrderItems",
-  async (id) => {
-    try {
-      const { data } = await axios.delete(`/api/users/${id}/cart`);
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-
-// create order from order items in cart for a logged in user
-export const createOrderFromOrderItems = createAsyncThunk(
-  "createOrder",
-  async (id) => {
-    try {
-      const { data } = await axios.put(`/api/users/${id}/cart/checkout`);
+      const { data } = await axios.get(`/api/cart/${id}`);
       return data;
     } catch (error) {
       console.error(error);
@@ -64,15 +22,6 @@ export const orderSlice = createSlice({
     builder.addCase(fetchOrderItems.fulfilled, (state, { payload }) => {
       return payload;
     });
-    builder.addCase(updateOrderItem.fulfilled, (state, { payload }) => {
-      return payload;
-    });
-    builder.addCase(clearOrderItems.fulfilled, (state, { payload }) => {
-      return [];
-    });
-    builder.addCase(createOrderFromOrderItems.fulfilled, (state, { payload }) => {
-      return payload;
-    })
   },
 });
 
