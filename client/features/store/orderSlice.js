@@ -14,6 +14,19 @@ export const fetchOrderItems = createAsyncThunk(
   }
 );
 
+// add order items for a logged in user
+export const addOrderItems = createAsyncThunk(
+  "fetchOrderItems",
+  async (orderInfo) => {
+    try {
+      const { data } = await axios.post(`/api/cart/${orderInfo.id}`, orderInfo);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const orderSlice = createSlice({
   name: "order",
   initialState: [],
@@ -21,6 +34,9 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchOrderItems.fulfilled, (state, { payload }) => {
       return payload;
+    });
+    builder.addCase(addOrderItems.fulfilled, (state, { payload }) => {
+      state.push(payload);
     });
   },
 });
