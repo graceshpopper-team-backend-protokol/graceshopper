@@ -31,19 +31,9 @@ export const editUser = createAsyncThunk(
       return data;
     } catch (err) {
       console.log(err);
-
-export const fetchSingleUser = createAsyncThunk("singleUser",
-    async (id) => {
-        try {
-            const { data } = await axios.get(`/api/users/${id}`);
-            return data;
-        } catch (err) {
-            console.error(err);
-        }
-
     }
-  }
-);
+  })
+
 
 export const singleUserSlice = createSlice({
   name: "singleUser",
