@@ -165,9 +165,11 @@ router.put("/:id", async (req, res, next) => {
         },
       ],
     });
+    // no need to pass orderId unless the amount we are updating this element to is 0 - then we can provide orderId : null which will remove this item from the cart
     await orderElement.update({
       orderQTY: Number(req.body.orderQTY),
       puzzleId: req.body.puzzleId,
+      orderId: req.body.orderId,
     });
     res.json(
       await OrderItem.findAll({
@@ -183,6 +185,22 @@ router.put("/:id", async (req, res, next) => {
         ],
       })
     );
+  } catch (err) {
+    next(err);
+  }
+});
+
+// delete all items in cart
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        status: "PENDING",
+        userId: req.params.id,
+      },
+    });
+    await cart.destroy();
+    res.json([]);
   } catch (err) {
     next(err);
   }

@@ -40,6 +40,19 @@ export const editOrderItems = createAsyncThunk(
   }
 );
 
+// deletes order items for a logged in user
+export const deleteOrderItems = createAsyncThunk(
+  "fetchOrderItems",
+  async (id) => {
+    try {
+      const { data } = await axios.put(`/api/cart/${id}`);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const orderSlice = createSlice({
   name: "order",
   initialState: [],
@@ -53,6 +66,9 @@ export const orderSlice = createSlice({
     });
     builder.addCase(editOrderItems.fulfilled, (state, { payload }) => {
       return payload;
+    });
+    builder.addCase(deleteOrderItems.fulfilled, (state, { payload }) => {
+      return [];
     });
   },
 });
