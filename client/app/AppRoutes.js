@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/pages/Home';
-import { me } from './store';
-import { User, Puzzle } from '../features/components/index'
-import { fetchPuzzles } from '../features/store/allPuzzlesSlice';
-import { fetchUsers } from '../features/store/allUsersSlice';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/pages/Home";
+import { me } from "./store";
+import { User, Puzzle } from "../features/components/index";
+import PuzzleDetail from "../features/pages/PuzzleDetail";
+import { fetchPuzzles } from "../features/store/allPuzzlesSlice";
+import { fetchUsers } from "../features/store/allUsersSlice";
 
 //This will need to be updated with AccountForm - Sarah
 /**
@@ -25,9 +26,10 @@ const AppRoutes = () => {
     <div>
       {true ? (
         <Routes>
+          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
-          <Route to='/users' element={<User />} />
+          <Route to="/users" element={<User />} />
         </Routes>
       ) : (
         <Routes>
@@ -43,6 +45,7 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route to="/home" element={<Home />} />
         </Routes>
       )} */}
     </div>

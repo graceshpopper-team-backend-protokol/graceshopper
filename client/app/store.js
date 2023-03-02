@@ -23,7 +23,7 @@ const store = configureStore({
     order: orderSlice, 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-});
+  });
 
 export default store;
 export * from '../features/auth/authSlice';
