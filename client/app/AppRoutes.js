@@ -7,6 +7,8 @@ import { me } from './store';
 import { User, Puzzle } from '../features/components/index'
 import { fetchPuzzles } from '../features/store/allPuzzlesSlice';
 import { fetchUsers } from '../features/store/allUsersSlice';
+import { fetchSingleUser, selectSingleUser } from '../features/store/singleUserSlice';
+import { Protected } from './Admin/Protected'
 
 //This will need to be updated with AccountForm - Sarah
 /**
@@ -15,11 +17,13 @@ import { fetchUsers } from '../features/store/allUsersSlice';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isAdmin = useSelector((state) => !!state.auth.me.isAdmin )
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(me());
   }, []);
+
 
   return (
     <div>
@@ -43,8 +47,13 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route path="/Dashboard"
+            element={<Protected isAdmin={isAdmin}>
+              <Dashboard />
+              </Protected>}
+          />
         </Routes>
-      )} */}
+      )} 
     </div>
   );
 };
