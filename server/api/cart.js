@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Order, OrderItem, Puzzle },
+  models: { Order, OrderItem, Puzzle },
 } = require("../db");
 module.exports = router;
 
@@ -45,7 +45,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/:id", async (req, res, next) => {
   try {
     // find cart for the user
-    const cart = await Order.findAll({
+    const cart = await Order.findOne({
       where: {
         status: "PENDING",
         userId: req.params.id,
@@ -53,12 +53,65 @@ router.post("/:id", async (req, res, next) => {
     });
     // we found a cart
     if (cart) {
-      const newItem = await OrderItem.create({
-        orderQTY: Number(req.body.orderQTY),
-        puzzleId: req.body.puzzleId,
-        orderId: cart.id,
+      // check if the item we're adding is already in the cart?
+      const orderElement = await OrderItem.findOne({
+        include: [
+          {
+            model: Order,
+            where: {
+              status: "PENDING",
+              userId: req.params.id,
+            },
+          },
+          {
+            model: Puzzle,
+            where: {
+              id: req.body.puzzleId,
+            },
+          },
+        ],
       });
-      res.json(newItem);
+      // if it's in the cart update the qty
+      if (orderElement) {
+        await orderElement.update({
+          orderQTY: Number(req.body.orderQTY),
+        });
+        res.json(
+          await OrderItem.findAll({
+            include: [
+              {
+                model: Order,
+                where: {
+                  status: "PENDING",
+                  userId: req.params.id,
+                },
+              },
+              { model: Puzzle },
+            ],
+          })
+        );
+      } else {
+        // if it's not in the cart create the item in the cart
+        await OrderItem.create({
+          orderQTY: Number(req.body.orderQTY),
+          puzzleId: req.body.puzzleId,
+          orderId: cart.id,
+        });
+        res.json(
+          await OrderItem.findAll({
+            include: [
+              {
+                model: Order,
+                where: {
+                  status: "PENDING",
+                  userId: req.params.id,
+                },
+              },
+              { model: Puzzle },
+            ],
+          })
+        );
+      }
     } else {
       // we didn't find the cart
       const newCart = await Order.create({
@@ -67,13 +120,102 @@ router.post("/:id", async (req, res, next) => {
         status: "PENDING",
         userId: req.params.id,
       });
-      const newItem = await OrderItem.create({
+      await OrderItem.create({
         orderQTY: Number(req.body.orderQTY),
         puzzleId: req.body.puzzleId,
         orderId: newCart.id,
       });
-      res.json(newItem);
+      res.json(
+        await OrderItem.findAll({
+          include: [
+            {
+              model: Order,
+              where: {
+                status: "PENDING",
+                userId: req.params.id,
+              },
+            },
+            { model: Puzzle },
+          ],
+        })
+      );
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+// edit cart portion
+router.put("/:id", async (req, res, next) => {
+  try {
+    const orderElement = await OrderItem.findOne({
+      include: [
+        {
+          model: Order,
+          where: {
+            status: "PENDING",
+            userId: req.params.id,
+          },
+        },
+        {
+          model: Puzzle,
+          where: {
+            id: req.body.puzzleId,
+          },
+        },
+      ],
+    });
+    // no need to pass orderId unless the amount we are updating this element to is 0 - then we can provide orderId : null which will remove this item from the cart
+    await orderElement.update({
+      orderQTY: Number(req.body.orderQTY),
+      puzzleId: req.body.puzzleId,
+      orderId: req.body.orderId,
+    });
+    res.json(
+      await OrderItem.findAll({
+        include: [
+          {
+            model: Order,
+            where: {
+              status: "PENDING",
+              userId: req.params.id,
+            },
+          },
+          { model: Puzzle },
+        ],
+      })
+    );
+  } catch (err) {
+    next(err);
+  }
+});
+
+// delete all items in cart
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        status: "PENDING",
+        userId: req.params.id,
+      },
+    });
+    await cart.destroy();
+    res.json([]);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update cart from cart status to order status
+router.put("/checkout/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        status: "PENDING",
+        userId: req.params.id,
+      },
+    });
+    res.json(await cart.update({ status: "ORDERED" }));
   } catch (err) {
     next(err);
   }
