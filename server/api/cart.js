@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const stripe = require('stripe')(sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN)
 const {
   models: { Order, OrderItem, Puzzle },
 } = require("../db");
@@ -220,3 +221,34 @@ router.put("/checkout/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+// send cart contents to Stripe for payment
+router.post("/checkout/:id", async (req, res, next) => {
+  try {
+    //stripe wants price instead of id
+    const items = req.body.items;
+    let lineItems = [];
+    items.forEach((items) => {
+      lineItems.push({
+        price: items.stripeId,
+        quantity: items.orderQTY
+      })
+    })
+  } catch (err) {
+    next (err)
+  }
+});
+
+const session = await stripe.checkout.sessions.create({
+  line_items: lineItems,
+  mode: "payment",
+  success_url: "http://localhost:8080/success",
+  cancel_url: "http://localhost:8080/cancel"
+});
+
+res.send(JSON.stringify({
+  url: session.url
+}));
+ 
+
+
