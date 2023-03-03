@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
-import Dashboard from "./Admin/Dashboard";
 import Home from "../features/pages/Home";
 import { me } from "./store";
+import Dashboard from "./Admin/Dashboard";
 import PuzzleDetail from "../features/pages/PuzzleDetail";
-import Cart from "../features/pages/Cart";
+import AllPuzzles from "../features/pages/AllPuzzles";
+import AllUsers from "../features/pages/AllUsers";
+
+//import { Protected } from './Admin/Protected'
 
 /**
  * COMPONENT
@@ -29,26 +32,24 @@ const AppRoutes = () => {
           <Routes>
             <Route path="/*" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-
+            <Route path="/puzzles" element={<AllPuzzles />} />
+            <Route path="/users" element={<AllUsers />} />
             <Route to="/home" element={<Home />} />
           </Routes>
         ) : (
           // Routes for Logged in users
           <Routes>
             <Route path="/*" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-
-            <Route path="/home" element={<Home />} />
+            <Route path="/puzzles" element={<AllPuzzles />} />
+            <Route to="/home" element={<Home />} />
           </Routes>
         )
       ) : (
         // Routes for not logged in users
         <Routes>
           <Route path="/*" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -58,8 +59,8 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-
-          <Route path="/home" element={<Home />} />
+          <Route path="/puzzles" element={<AllPuzzles />} />
+          <Route to="/home" element={<Home />} />
         </Routes>
       )}
     </div>

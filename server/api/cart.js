@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const stripe = require('stripe')('sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN')
+const stripe = require("stripe")(
+  "sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN"
+);
 const {
   models: { Order, OrderItem, Puzzle },
 } = require("../db");
@@ -231,35 +233,23 @@ router.post("/checkout/:id", async (req, res, next) => {
     items.forEach((items) => {
       lineItems.push({
         price: items.stripeId,
-        quantity: items.orderQTY
-      })
+        quantity: items.orderQTY,
+      });
     });
 
-    const session = await stripe.checkout.sessions.create({
+    const session = stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
       success_url: "http://localhost:8080/success",
-      cancel_url: "http://localhost:8080/cancel"
+      cancel_url: "http://localhost:8080/cancel",
     });
-    
-    res.send(JSON.stringify({
-      url: session.url
-    }));
 
-const session = stripe.checkout.sessions.create({
-  line_items: lineItems,
-  mode: "payment",
-  success_url: "http://localhost:8080/success",
-  cancel_url: "http://localhost:8080/cancel"
-});
-
-res.send(JSON.stringify({
-  url: session.url
-}));
+    res.send(
+      JSON.stringify({
+        url: session.url,
+      })
+    );
   } catch (err) {
-    next (err)
+    next(err);
   }
 });
- 
-
-
