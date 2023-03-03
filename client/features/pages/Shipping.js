@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Shipping.module.css"
 
-const Shipping = () => {
+//if isLoggedIn? === true...
+//fetch User (and fill in shipping address saved to account)
+
+//add Nav to Confirm Address Button
+
+const Shipping = ({ cart }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate;
   //const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -11,15 +16,11 @@ const Shipping = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const handleCheckout = (ev) => {
-    ev.preventDefault();
-    dispatch(/*addOrder*/)
-    //Navigate to Confirmation Page
-  };
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    await dispatch()
+    await dispatch(/**/)
+    Navigate(to="/cart/checkout/:id/", { state: cart })
   };
 
   return (
@@ -45,7 +46,7 @@ const Shipping = () => {
           <input for="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
           <label for="address">Address</label>
           <input name="address" type="text" value={address} onChange={(e) => setAddress(e.target.value)}/>
-          <button type="submit">Confirm Address</button>
+          <button type="submit" onClick={handleSubmit}>Confirm Address</button>
         </form>
       </section>
     </div>
