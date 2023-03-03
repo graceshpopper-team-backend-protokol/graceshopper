@@ -34,7 +34,7 @@ function createUser() {
     lastName.toLowerCase()
   );
   const address = faker.address.streetAddress();
-  const userType = "CUSTOMER";
+  const isAdmin = false;
 
   return {
     username,
@@ -42,7 +42,7 @@ function createUser() {
     firstName,
     lastName,
     address,
-    userType,
+    isAdmin,
   };
 }
 
@@ -55,7 +55,7 @@ function createAdmin() {
   const lastName = "Shopper";
   const username = "info@graceshopper.com";
   const address = "100 admin road";
-  const userType = "ADMIN";
+  const isAdmin = true;
 
   return {
     username,
@@ -63,7 +63,7 @@ function createAdmin() {
     firstName,
     lastName,
     address,
-    userType,
+    isAdmin,
   };
 }
 
@@ -76,7 +76,7 @@ function createTestUser() {
   const lastName = "Tester";
   const username = "graceshopper@tester.com";
   const address = "100 testing road";
-  const userType = "CUSTOMER";
+  const isAdmin = false;
 
   return {
     username,
@@ -84,7 +84,7 @@ function createTestUser() {
     firstName,
     lastName,
     address,
-    userType,
+    isAdmin,
   };
 }
 

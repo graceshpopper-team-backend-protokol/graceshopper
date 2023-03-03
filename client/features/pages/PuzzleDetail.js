@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   fetchSinglePuzzle,
   selectSinglePuzzle,
 } from "../store/singlePuzzleSlice";
+import { addOrderItems } from "../store/orderSlice";
 import styles from "../styles/PuzzleDetail.module.css";
 
 //add AddToCartHandler function and button onClick
@@ -13,6 +14,8 @@ const PuzzleDetail = () => {
   const dispatch = useDispatch();
   const puzzle = useSelector(selectSinglePuzzle);
   const { id } = useParams();
+  const puzzleId = puzzle.id;
+  const [orderQTY, setOrderQTY] = useState(1);
 
   useEffect(() => {
     dispatch(fetchSinglePuzzle(id));
@@ -26,6 +29,11 @@ const PuzzleDetail = () => {
     return QuantOpts;
   };
 
+  const handleAdd = async (ev) => {
+    ev.preventDefault();
+    dispatch(addOrderItems({ id, puzzleId, orderQTY }));
+  };
+
   return (
     <div className={styles.container}>
       <img className={styles.img} src={puzzle.imgURL} />
@@ -35,7 +43,7 @@ const PuzzleDetail = () => {
         <p>{puzzle.price}</p>
       </div>
       <div className={styles.addToCart}>
-        <select className={styles.quantity}>
+        <select className={styles.quantity} value={orderQTY} onChange={(e) => setOrderQTY(e.target.value)}>
           {QuantityDropDown().map((num) => {
             return (
               <option value={num} id={num}>
@@ -44,7 +52,7 @@ const PuzzleDetail = () => {
             );
           })}
         </select>
-        <button>Add to Cart</button>
+        <button onClick={handleAdd}>Add to Cart</button>
       </div>
     </div>
   );

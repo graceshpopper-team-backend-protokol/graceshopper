@@ -30,8 +30,9 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  userType: {
-    type: Sequelize.ENUM("ADMIN", "CUSTOMER"),
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
     //A 'CUSTOMER' could be a logged in user or a guest
     //Differentiated by whether or not a password exists
   },
@@ -78,6 +79,7 @@ User.findByToken = async function (token) {
     throw error;
   }
 };
+
 
 /**
  * hooks
