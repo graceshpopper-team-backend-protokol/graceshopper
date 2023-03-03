@@ -5,6 +5,7 @@ import AuthForm from "../features/auth/AuthForm";
 import Dashboard from "./Admin/Dashboard";
 import Home from "../features/pages/Home";
 import { me } from "./store";
+import PuzzleDetail from "../features/pages/PuzzleDetail";
 
 /**
  * COMPONENT
