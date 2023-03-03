@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import AuthForm from "../features/auth/AuthForm";
-import Home from "../features/pages/Home";
-import { me } from "./store";
-import PuzzleDetail from "../features/pages/PuzzleDetail";
-import Dashboard from "./Admin/Dashboard";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import AuthForm from '../features/auth/AuthForm';
+import Home from '../features/pages/Home';
+import { me } from './store';
+
+//import { Protected } from './Admin/Protected'
 
 /**
  * COMPONENT
@@ -54,6 +54,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
 
           <Route to="/home" element={<Home />} />
         </Routes>
