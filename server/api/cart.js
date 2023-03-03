@@ -245,6 +245,17 @@ router.post("/checkout/:id", async (req, res, next) => {
     res.send(JSON.stringify({
       url: session.url
     }));
+
+const session = stripe.checkout.sessions.create({
+  line_items: lineItems,
+  mode: "payment",
+  success_url: "http://localhost:8080/success",
+  cancel_url: "http://localhost:8080/cancel"
+});
+
+res.send(JSON.stringify({
+  url: session.url
+}));
   } catch (err) {
     next (err)
   }
