@@ -5,7 +5,6 @@ import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
 import { me } from './store';
 
-
 //import { Protected } from './Admin/Protected'
 
 /**
@@ -14,47 +13,52 @@ import { me } from './store';
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  const isAdmin = useSelector((state) => !!state.auth.me.isAdmin )
+  const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(me());
   }, []);
 
-
   return (
     <div>
       {isLoggedIn ? (
-        <Routes>
-          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-          <Route to="/users" element={<AllUsers />} />
-        </Routes>
+        isAdmin ? (
+          // Routes for Admin only - otherwise redirected to homepage
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        ) : (
+          // Routes for Logged in users
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        )
       ) : (
+        // Routes for not logged in users
         <Routes>
-          <Route
-            path="/*"
-            element={<Login name="login" displayName="Login" />}
-          />
+          <Route path="/*" element={<Home />} />
           <Route
             path="/login"
-            element={<Login name="login" displayName="Login" />}
+            element={<AuthForm name="login" displayName="Login" />}
           />
           <Route
             path="/signup"
-            element={<Signup name="signup" displayName="Sign Up" />}
+            element={<AuthForm name="signup" displayName="Sign Up" />}
           />
+          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
 
-          {/* <Route path="/Dashboard"
-            element={<Protected isAdmin={isAdmin}>
-              <Dashboard />
-              </Protected>}
-          /> */}
-          
+
           <Route to="/home" element={<Home />} />
         </Routes>
-      )} 
+      )}
     </div>
   );
 };
