@@ -33,9 +33,14 @@ const AppRoutes = () => {
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
+          <Route
+            path="/login"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
         </Routes>
       ) : (
         <Routes>
+          <Route path="/*" element={<Home />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -51,7 +56,7 @@ const AppRoutes = () => {
               </Protected>}
           /> */}
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-          <Route path="/*" element={<Home />} />
+
           <Route to="/home" element={<Home />} />
         </Routes>
       )}
