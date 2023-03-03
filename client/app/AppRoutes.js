@@ -6,6 +6,7 @@ import Dashboard from "./Admin/Dashboard";
 import Home from "../features/pages/Home";
 import { me } from "./store";
 import PuzzleDetail from "../features/pages/PuzzleDetail";
+import Cart from "../features/pages/Cart";
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ const AppRoutes = () => {
           <Routes>
             <Route path="/*" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
 
             <Route to="/home" element={<Home />} />
@@ -36,15 +38,17 @@ const AppRoutes = () => {
           // Routes for Logged in users
           <Routes>
             <Route path="/*" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
 
-            <Route to="/home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         )
       ) : (
         // Routes for not logged in users
         <Routes>
           <Route path="/*" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -55,7 +59,7 @@ const AppRoutes = () => {
           />
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
 
-          <Route to="/home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       )}
     </div>

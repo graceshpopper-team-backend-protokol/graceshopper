@@ -1,25 +1,29 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrderFromOrderItems, fetchOrderItems, selectOrder } from "../store/orderSlice.js";
-import styles from "../styles/Cart.js";
+import {
+  createOrderFromOrderItems,
+  fetchOrderItems,
+  selectOrder,
+} from "../store/orderSlice.js";
+import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectOrder);
-  const { id } = useParams();
+  const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
     dispatch(fetchOrderItems(id));
   }, [dispatch, id]);
 
   const estimateTax = () => {
-    return (cart.order.orderTotal/100)*10
+    return (cart.order.orderTotal / 100) * 10;
   };
 
   const total = () => {
-    return estimateTax() + cart.order.orderTotal
+    return estimateTax() + cart.order.orderTotal;
   };
 
   const RenderCart = () => {
@@ -55,12 +59,13 @@ const Cart = () => {
             })}
           </section>
         </section>
+        {console.log(cart)}
         <section className={styles.summaryRight}>
           <h1>Order Summary</h1>
           <div className={styles.infoContainer}>
             <div>
               <span>Subtotal:</span>
-              <span>${cart.order.orderTotal}</span>
+              <span>${cart.orderTotal}</span>
             </div>
             <div>
               <span>Shipping</span>
@@ -75,7 +80,7 @@ const Cart = () => {
               <span>${total()}</span>
             </div>
           </div>
-          <button /*onClick={Nav to Checkout}*/>Proceed to Checkout</button>
+          <button /*onClick={Nav to Checkout} */>Proceed to Checkout</button>
         </section>
       </div>
     );
