@@ -239,7 +239,7 @@ router.post("/checkout/:id", async (req, res, next) => {
   }
 });
 
-const session = await stripe.checkout.sessions.create({
+const session = stripe.checkout.sessions.create({
   line_items: lineItems,
   mode: "payment",
   success_url: "http://localhost:8080/success",
