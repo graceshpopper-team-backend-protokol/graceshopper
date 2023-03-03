@@ -28,6 +28,9 @@ const Puzzle = db.define("puzzle", {
     type: Sequelize.DECIMAL(10,2),
     allowNull: false,
   },
+  stripeId: {
+    type: Sequelize.INTEGER,
+  }
 });
 
 module.exports = Puzzle;
