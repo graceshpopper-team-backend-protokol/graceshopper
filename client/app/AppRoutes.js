@@ -5,7 +5,7 @@ import AuthForm from "../features/auth/AuthForm";
 import {Login, Signup} from "../features/components/AccountLogin";
 import Home from "../features/pages/Home";
 import { me } from "./store";
-import { AllUsers } from "../features/pages/AllUsers";
+// import { AllUsers } from "../features/pages/AllUsers";
 import PuzzleDetail from "../features/pages/PuzzleDetail";
 import { fetchPuzzles } from "../features/store/allPuzzlesSlice";
 import { fetchUsers } from "../features/store/allUsersSlice";
@@ -30,7 +30,7 @@ const AppRoutes = () => {
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
           <Route path="/*" element={<Home />} />
           <Route to="/home" element={<Home />} />
-          <Route to="/users" element={<AllUsers />} />
+          {/* <Route to="/users" element={<AllUsers />} /> */}
         </Routes>
       ) : (
         <Routes>

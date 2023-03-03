@@ -24,15 +24,9 @@ const AccountForm = (props) => {
             </div>
             <div>
                 <button type="submit">{displayName}</button>
-                {name === 'login' ? (<div className="formSignUp">
-                    <p>Need an account?</p>
-                    <Link to ='/signup'>Sign Up Here</Link>
-                    </div>
+                {name === 'login' ? (<div className="formSignUp"></div>
                     ) : (
-                        <div className="formLogIn">
-                            <p>Already have an account?</p>
-                            <Link to='/login'>Log In</Link>
-                            </div>
+                        <div className="formLogIn"></div>
                     )}
             </div>
             {error && error.response && <div>{error.response.data}</div>}
