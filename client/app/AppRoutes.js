@@ -5,13 +5,13 @@ import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/pages/Home";
 import { me } from "./store";
 import PuzzleDetail from "../features/pages/PuzzleDetail";
+import Dashboard from "./Admin/Dashboard";
 import { fetchPuzzles } from "../features/store/allPuzzlesSlice";
 import { fetchUsers } from "../features/store/allUsersSlice";
 import {
   fetchSingleUser,
   selectSingleUser,
 } from "../features/store/singleUserSlice";
-import { Protected } from "./Admin/Protected";
 
 /**
  * COMPONENT
@@ -29,15 +29,22 @@ const AppRoutes = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <Routes>
-          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-          <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-        </Routes>
+        isAdmin ? (
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        )
       ) : (
         <Routes>
           <Route path="/*" element={<Home />} />
