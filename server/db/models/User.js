@@ -1,9 +1,11 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
+const JWT = process.env.JWT;
 
 const User = db.define("user", {
   username: {
@@ -19,15 +21,12 @@ const User = db.define("user", {
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
@@ -48,7 +47,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
-  return jwt.sign({ id: this.id }, process.env.JWT);
+  return jwt.sign({ id: this.id }, JWT);
 };
 
 /**
@@ -64,20 +63,20 @@ User.authenticate = async function ({ username, password }) {
   return user.generateToken();
 };
 
-// User.findByToken = async function (token) {
-//   try {
-//     const { id } = await jwt.verify(token, process.env.JWT);
-//     const user = User.findByPk(id);
-//     if (!user) {
-//       throw "nooo";
-//     }
-//     return user;
-//   } catch (ex) {
-//     const error = Error("bad token");
-//     error.status = 401;
-//     throw error;
-//   }
-// };
+User.findByToken = async function (token) {
+  try {
+    const { id } = await jwt.verify(token, JWT);
+    const user = User.findByPk(id);
+    if (!user) {
+      throw "nooo";
+    }
+    return user;
+  } catch (ex) {
+    const error = Error("bad token");
+    error.status = 401;
+    throw error;
+  }
+};
 
 /**
  * hooks

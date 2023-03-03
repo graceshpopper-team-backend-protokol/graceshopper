@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrderFromOrderItems, fetchOrderItems, selectOrder } from "../store/orderSlice.js";
 import styles from "../styles/Cart.js";
 import OrderItemRow from "../components/OrderItemRow.js";
 
+//needs to pass down cart(Order) and userId on Nav
+
 const Cart = () => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
   const cart = useSelector(selectOrder);
   const { id } = useParams();
 
@@ -20,6 +23,11 @@ const Cart = () => {
 
   const total = () => {
     return estimateTax() + cart.order.orderTotal
+  };
+
+  const handleNav = () => {
+    //also pass down user Id through Navigate
+    Navigate("/cart/shipping", { state: cart })
   };
 
   const RenderCart = () => {
@@ -75,7 +83,7 @@ const Cart = () => {
               <span>${total()}</span>
             </div>
           </div>
-          <button /*onClick={Nav to Checkout}*/>Proceed to Checkout</button>
+          <button onClick={handleNav}>Proceed to Shipping</button>
         </section>
       </div>
     );

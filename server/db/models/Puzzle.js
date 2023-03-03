@@ -29,7 +29,7 @@ const Puzzle = db.define("puzzle", {
     allowNull: false,
   },
   stripeId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
   }
 });
 
