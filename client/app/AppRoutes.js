@@ -4,11 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
 import { me } from './store';
-import { User, Puzzle } from '../features/components/index'
-import { fetchPuzzles } from '../features/store/allPuzzlesSlice';
-import { fetchUsers } from '../features/store/allUsersSlice';
-import { fetchSingleUser, selectSingleUser } from '../features/store/singleUserSlice';
-import { Protected } from './Admin/Protected'
+import { User, Puzzle } from '../features/components/pages'
+
+//import { Protected } from './Admin/Protected'
 
 /**
  * COMPONENT
@@ -48,11 +46,11 @@ const AppRoutes = () => {
             element={<Signup name="signup" displayName="Sign Up" />}
           />
 
-          <Route path="/Dashboard"
+          {/* <Route path="/Dashboard"
             element={<Protected isAdmin={isAdmin}>
               <Dashboard />
               </Protected>}
-          />
+          /> */}
           
           <Route to="/home" element={<Home />} />
         </Routes>
