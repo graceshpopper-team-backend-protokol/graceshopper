@@ -1,10 +1,11 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
-const JWT = process.env.JWT
+const JWT = process.env.JWT;
 
 const User = db.define("user", {
   username: {
@@ -79,7 +80,6 @@ User.findByToken = async function (token) {
     throw error;
   }
 };
-
 
 /**
  * hooks
