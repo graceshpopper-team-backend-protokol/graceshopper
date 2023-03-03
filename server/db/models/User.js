@@ -29,8 +29,9 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  userType: {
-    type: Sequelize.ENUM("ADMIN", "CUSTOMER"),
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
     //A 'CUSTOMER' could be a logged in user or a guest
     //Differentiated by whether or not a password exists
   },
@@ -63,20 +64,20 @@ User.authenticate = async function ({ username, password }) {
   return user.generateToken();
 };
 
-User.findByToken = async function (token) {
-  try {
-    const { id } = await jwt.verify(token, process.env.JWT);
-    const user = User.findByPk(id);
-    if (!user) {
-      throw "nooo";
-    }
-    return user;
-  } catch (ex) {
-    const error = Error("bad token");
-    error.status = 401;
-    throw error;
-  }
-};
+// User.findByToken = async function (token) {
+//   try {
+//     const { id } = await jwt.verify(token, process.env.JWT);
+//     const user = User.findByPk(id);
+//     if (!user) {
+//       throw "nooo";
+//     }
+//     return user;
+//   } catch (ex) {
+//     const error = Error("bad token");
+//     error.status = 401;
+//     throw error;
+//   }
+// };
 
 /**
  * hooks
