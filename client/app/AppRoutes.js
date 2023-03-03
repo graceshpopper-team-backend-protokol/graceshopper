@@ -5,13 +5,7 @@ import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/pages/Home";
 import { me } from "./store";
 import PuzzleDetail from "../features/pages/PuzzleDetail";
-import { fetchPuzzles } from "../features/store/allPuzzlesSlice";
-import { fetchUsers } from "../features/store/allUsersSlice";
-import {
-  fetchSingleUser,
-  selectSingleUser,
-} from "../features/store/singleUserSlice";
-import { Protected } from "./Admin/Protected";
+import Dashboard from "./Admin/Dashboard";
 
 /**
  * COMPONENT
@@ -29,16 +23,26 @@ const AppRoutes = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <Routes>
-          <Route path="/puzzles/:id" element={<PuzzleDetail />} />
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-          <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-        </Routes>
+        isAdmin ? (
+          // Routes for Admin only - otherwise redirected to homepage
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        ) : (
+          // Routes for Logged in users
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/puzzles/:id" element={<PuzzleDetail />} />
+
+            <Route to="/home" element={<Home />} />
+          </Routes>
+        )
       ) : (
+        // Routes for not logged in users
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route
@@ -49,12 +53,6 @@ const AppRoutes = () => {
             path="/signup"
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
-          {/* Commented this out for now because it was causing an error
-          <Route path="/Dashboard"
-            element={<Protected isAdmin={isAdmin}>
-              <Dashboard />
-              </Protected>}
-          /> */}
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
 
           <Route to="/home" element={<Home />} />
