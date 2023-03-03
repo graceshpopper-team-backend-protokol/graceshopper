@@ -19,7 +19,7 @@ async function orderSeed() {
   for (let i = 0; i < 100; i++) {
     await OrderItem.create({
       orderQTY: Math.floor(Math.random() * 5) + 1,
-      puzzleId: Math.floor(Math.random() * 50) + 1,
+      puzzleId: Math.floor(Math.random() * 45) + 1,
       orderId: Math.floor(Math.random() * 49) + 1,
     });
   }
