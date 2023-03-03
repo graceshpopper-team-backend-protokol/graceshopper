@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/pages/Home';
 import { me } from './store';
-import { User, Puzzle } from '../features/components/pages'
+
 
 //import { Protected } from './Admin/Protected'
 
