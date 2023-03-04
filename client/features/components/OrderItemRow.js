@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import styles from "../styles/OrderItemRow.js"
+import styles from "../styles/OrderItemRow.module.css"
 
 const OrderItemCard = ({ orderItem }) => {
   const puzzle = orderItem.puzzle;

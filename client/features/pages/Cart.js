@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrderFromOrderItems, fetchOrderItems, selectOrder } from "../store/orderSlice.js";
-import styles from "../styles/Cart.js";
+import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
 
 //needs to pass down cart(Order) and userId on Nav
