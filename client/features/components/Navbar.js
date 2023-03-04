@@ -19,23 +19,19 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <ul>
-              <li>
                 <Link to="/home">Home</Link>
-              </li>
-              <li>
                 <Link to="/puzzles" className="navLink">Shop</Link>
-              </li>
+                <Link to="/cart">Cart</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
-            </ul>
           </div>
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/cart">Cart</Link>
           </div>
         )}
       </nav>
