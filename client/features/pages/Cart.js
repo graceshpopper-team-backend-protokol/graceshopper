@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createOrderFromOrderItems,
+  deleteOrderItems,
   fetchOrderItems,
   selectOrder,
 } from "../store/orderSlice.js";
@@ -27,6 +27,10 @@ const Cart = () => {
 
   const total = (cart) => {
     return estimateTax() + cart.order.orderTotal;
+  };
+
+  const handleClear = async () => {
+    await dispatch(deleteOrderItems(id));
   };
 
   const handleNav = () => {
@@ -89,6 +93,7 @@ const Cart = () => {
             </div> */}
           </div>
           <button onClick={handleNav}>Proceed to Shipping</button>
+          <button onClick={handleClear}>Clear Cart</button>
         </section>
       </div>
     );
