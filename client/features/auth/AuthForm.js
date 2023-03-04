@@ -13,16 +13,20 @@ import { authenticate } from '../../app/store';
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = () => {
+    navigate('/home')
+  }
 
   const handleSubmit = (evt) => {
-    const navigate = useNavigate();
-    const location = useLocation();
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
     dispatch(authenticate({ username, password, method: formName }));
-    navigate({redirectTo: location})
+    
+    
   };
 
   return (
@@ -41,7 +45,7 @@ const AuthForm = ({ name, displayName }) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <button type="submit" onSubmit={redirect}>{displayName}</button>
         </div>
         {error && <div> {error} </div>}
       </form>
