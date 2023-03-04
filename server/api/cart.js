@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const stripe = require('stripe')('sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN')
+const stripe = require("stripe")(
+  "sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN"
+);
 const {
   models: { Order, OrderItem, Puzzle },
 } = require("../db");
@@ -74,8 +76,10 @@ router.post("/:id", async (req, res, next) => {
       });
       // if it's in the cart update the qty
       if (orderElement) {
+        const newQTY =
+          Number(orderElement.orderQTY) + Number(req.body.orderQTY);
         await orderElement.update({
-          orderQTY: Number(req.body.orderQTY),
+          orderQTY: newQTY,
         });
         res.json(
           await OrderItem.findAll({
@@ -216,7 +220,9 @@ router.put("/checkout/:id", async (req, res, next) => {
         userId: req.params.id,
       },
     });
-    res.json(await cart.update({ status: "ORDERED" }));
+    res.json(
+      await cart.update({ status: "ORDERED", orderTotal: req.body.orderTotal })
+    );
   } catch (err) {
     next(err);
   }
@@ -226,29 +232,29 @@ router.put("/checkout/:id", async (req, res, next) => {
 router.post("/checkout/:id", async (req, res, next) => {
   try {
     //stripe wants price instead of id
-    const items = req.body.items;
+    const items = req.body.cart;
+
     let lineItems = [];
-    items.forEach((items) => {
+    items.array.forEach((item) => {
       lineItems.push({
-        price: items.stripeId,
-        quantity: items.orderQTY
-      })
+        price: item.stripeId,
+        quantity: item.orderQTY,
+      });
     });
 
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
       success_url: "http://localhost:8080/success",
-      cancel_url: "http://localhost:8080/cancel"
+      cancel_url: "http://localhost:8080/cancel",
     });
-    
-    res.send(JSON.stringify({
-      url: session.url
-    }));
+
+    res.send(
+      JSON.stringify({
+        url: session.url,
+      })
+    );
   } catch (err) {
-    next (err)
+    next(err);
   }
 });
- 
-
-
