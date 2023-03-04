@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,12 +21,27 @@ const Cart = () => {
     dispatch(fetchOrderItems(id));
   }, [dispatch, id]);
 
-  const estimateTax = (cart) => {
-    return (cart.order.orderTotal / 100) * 10;
+  const orderTotal = () => {
+    let prices = [];
+    cart.forEach((orderItem) => {
+      prices.push(Number(orderItem.puzzle.price)*orderItem.orderQTY)
+    });
+    console.log(prices);
+    let total = 0.00;
+    for (let i = 0; i < prices.length; i++) {
+      total += prices[i]
+    };
+    return total
   };
 
-  const total = (cart) => {
-    return estimateTax() + cart.order.orderTotal;
+  const estimateTax = () => {
+    const tax = (orderTotal() / 100) * 10;
+    return tax.toFixed(2)
+  };
+
+  const total = () => {
+    const total = Number(estimateTax()) + orderTotal();
+    return total.toFixed(2)
   };
 
   const handleClear = async () => {
@@ -35,7 +50,7 @@ const Cart = () => {
 
   const handleNav = () => {
     //also pass down user Id through Navigate
-    Navigate("/cart/shipping", { state: cart });
+    Navigate("/cart/shipping", {state: total()});
   };
 
   const RenderCart = () => {
@@ -51,7 +66,7 @@ const Cart = () => {
     }
     return (
       <div>
-        <h1>There are {cart.length} items in your cart.</h1>
+        <h1>There are {cart.length} item(s) in your cart.</h1>
         <section className={styles.itemsLeft}>
           <div className={styles.banner}>
             <h2>Puzzle</h2>
@@ -74,23 +89,22 @@ const Cart = () => {
         <section className={styles.summaryRight}>
           <h1>Order Summary</h1>
           <div className={styles.infoContainer}>
-            {/* <div>
-              <span>Subtotal:</span>
-              <span>${cart.order[0].orderTotal}</span>
-            </div> */}
-            {/*
             <div>
-              <span>Shipping</span>
+              <span>Subtotal:</span>
+              <span>${orderTotal()}</span>
+            </div>
+            <div>
+              <span>Shipping:</span>
               <span>FREE</span>
             </div>
             <div>
-              <span>Estimated Tax</span>
-              <span>${estimateTax(cart)}</span>
+              <span>Estimated Tax:</span>
+              <span>${estimateTax()}</span>
             </div>
             <div>
               <span>Total</span>
-              <span>${total(cart)}</span>
-            </div> */}
+              <span>${total()}</span>
+            </div>
           </div>
           <button onClick={handleNav}>Proceed to Shipping</button>
           <button onClick={handleClear}>Clear Cart</button>
