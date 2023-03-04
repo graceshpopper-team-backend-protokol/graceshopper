@@ -76,8 +76,10 @@ router.post("/:id", async (req, res, next) => {
       });
       // if it's in the cart update the qty
       if (orderElement) {
+        const newQTY =
+          Number(orderElement.orderQTY) + Number(req.body.orderQTY);
         await orderElement.update({
-          orderQTY: Number(req.body.orderQTY),
+          orderQTY: newQTY,
         });
         res.json(
           await OrderItem.findAll({
