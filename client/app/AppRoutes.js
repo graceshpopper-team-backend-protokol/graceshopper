@@ -8,6 +8,7 @@ import Dashboard from './Admin/Dashboard';
 import PuzzleDetail from '../features/pages/PuzzleDetail';
 import AllPuzzles from '../features/pages/AllPuzzles';
 import AllUsers from '../features/pages/AllUsers'
+import Cart from '../features/pages/Cart';
 
 //import { Protected } from './Admin/Protected'
 
@@ -34,8 +35,9 @@ const AppRoutes = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
-            <Route path='/users' element={<AllUsers />} />
+            <Route path="/users" element={<AllUsers />} />
             <Route to="/home" element={<Home />} />
+            <Route to="/cart" element={<Cart />} />
           </Routes>
         ) : (
           // Routes for Logged in users
@@ -44,6 +46,7 @@ const AppRoutes = () => {
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
             <Route to="/home" element={<Home />} />
+            <Route to="/cart" element={<Cart />} />
           </Routes>
         )
       ) : (
@@ -59,6 +62,7 @@ const AppRoutes = () => {
           <Route path="/puzzles/:id" element={<PuzzleDetail />} />
           <Route path="/puzzles" element={<AllPuzzles />} />
           <Route to="/home" element={<Home />} />
+          <Route to="/cart" element={<Cart />} />
         </Routes>
       )}
     </div>

@@ -27,14 +27,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// router.post("/new", async (req, res, next) => {
-//   try {
-//     res.status(201).send(await User.create(req.body));
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 router.put("/:id/edit", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
