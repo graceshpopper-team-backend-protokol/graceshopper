@@ -5,6 +5,7 @@ import { logout } from '../../app/store';
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -17,15 +18,28 @@ const Navbar = () => {
       <h1>FS-App-Template</h1>
       <nav>
         {isLoggedIn ? (
+          isAdmin ? (
           <div>
-            {/* The navbar will show these links after you log in */}
+            {/* The navbar will show these links after Admin is logged in */}
                 <Link to="/home">Home</Link>
                 <Link to="/puzzles" className="navLink">Shop</Link>
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart" className="navLink">Cart</Link>
+                <Link to="/dashboard" className="navLink">Dashboard</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
           </div>
+            ) : (
+          <div>
+            {/* The navbar will show these links after User is logged in */}
+                <Link to="/home">Home</Link>
+                <Link to="/puzzles" className="navLink">Shop</Link>
+                <Link to="/cart" className="navLink">Cart</Link>
+            <button type="button" onClick={logoutAndRedirectHome}>
+              Logout
+            </button>
+          </div>
+        ) 
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
