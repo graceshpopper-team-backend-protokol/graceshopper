@@ -17,6 +17,29 @@ const Checkout = () => {
   const cart = useSelector(selectOrder);
   const { id } = useSelector((state) => state.auth.me);
 
+  const estimateTax = () => {
+    const tax = (orderTotal() / 100) * 10;
+    return tax.toFixed(2)
+  };
+
+  const orderTotal = () => {
+    let prices = [];
+    cart.forEach((orderItem) => {
+      prices.push(Number(orderItem.puzzle.price)*orderItem.orderQTY)
+    });
+    console.log(prices);
+    let total = 0.00;
+    for (let i = 0; i < prices.length; i++) {
+      total += prices[i]
+    };
+    return total
+  };
+
+  const total = () => {
+    const total = Number(estimateTax()) + orderTotal();
+    return total.toFixed(2)
+  };
+
   console.log(cart);
   useEffect(() => {
     dispatch(fetchOrderItems(id));
@@ -39,7 +62,7 @@ const Checkout = () => {
     //     }
     //   });
     // fix order total depending on what is being ordered
-    await dispatch(createOrderFromOrderItems({ id, orderTotal: 100 }));
+    await dispatch(createOrderFromOrderItems({ id, orderTotal: total() }));
     Navigate("/cart/confirmation");
   };
 
@@ -50,20 +73,20 @@ const Checkout = () => {
         <div className={styles.infoContainer}>
           <div>
             <span>Subtotal:</span>
-            {/* <span>${cart.order.orderTotal}</span> */}
+            {orderTotal()}
           </div>
           <div>
-            <span>Shipping</span>
+            <span>Shipping:</span>
             <span>FREE</span>
           </div>
-          {/* <div>
-            <span>Estimated Tax</span>
+          <div>
+            <span>Estimated Tax:</span>
             <span>${estimateTax()}</span>
           </div>
           <div>
-            <span>Total</span>
+            <span>Total:</span>
             <span>${total()}</span>
-          </div> */}
+          </div>
         </div>
         <button variant="success" onClick={checkout}>
           Confirm Order

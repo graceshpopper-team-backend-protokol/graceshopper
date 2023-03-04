@@ -234,8 +234,8 @@ router.post("/checkout/:id", async (req, res, next) => {
     //stripe wants price instead of id
     const items = req.body.cart;
 
-    const lineItems = [];
-    items.map((item) => {
+    let lineItems = [];
+    items.array.forEach((item) => {
       lineItems.push({
         price: item.stripeId,
         quantity: item.orderQTY,
