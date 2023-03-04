@@ -56,9 +56,12 @@ export const deleteOrderItems = createAsyncThunk(
 // create order from order items in cart for a logged in user
 export const createOrderFromOrderItems = createAsyncThunk(
   "createOrder",
-  async (id) => {
+  async (orderInfo) => {
     try {
-      const { data } = await axios.put(`/api/cart/checkout/${id}`);
+      const { data } = await axios.put(
+        `/api/cart/checkout/${orderInfo.id}`,
+        orderInfo
+      );
       return data;
     } catch (error) {
       console.error(error);

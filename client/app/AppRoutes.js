@@ -11,6 +11,7 @@ import AllUsers from "../features/pages/AllUsers";
 import Cart from "../features/pages/Cart";
 import Shipping from "../features/pages/Shipping";
 import Checkout from "../features/pages/Checkout";
+import Confirmation from "../features/components/Confirmation";
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ const AppRoutes = () => {
         isAdmin ? (
           // Routes for Admin only - otherwise redirected to homepage
           <Routes>
+            <Route path="/cart/confirmation" element={<Confirmation />} />
             <Route path="/cart/checkout" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />
@@ -44,6 +46,7 @@ const AppRoutes = () => {
         ) : (
           // Routes for Logged in users
           <Routes>
+            <Route path="/cart/confirmation" element={<Confirmation />} />
             <Route path="/cart/checkout" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />{" "}

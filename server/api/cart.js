@@ -220,7 +220,9 @@ router.put("/checkout/:id", async (req, res, next) => {
         userId: req.params.id,
       },
     });
-    res.json(await cart.update({ status: "ORDERED" }));
+    res.json(
+      await cart.update({ status: "ORDERED", orderTotal: req.body.orderTotal })
+    );
   } catch (err) {
     next(err);
   }
@@ -230,12 +232,13 @@ router.put("/checkout/:id", async (req, res, next) => {
 router.post("/checkout/:id", async (req, res, next) => {
   try {
     //stripe wants price instead of id
-    const items = req.body.items;
-    let lineItems = [];
-    items.forEach((items) => {
+    const items = req.body.cart;
+
+    const lineItems = [];
+    items.map((item) => {
       lineItems.push({
-        price: items.stripeId,
-        quantity: items.orderQTY,
+        price: item.stripeId,
+        quantity: item.orderQTY,
       });
     });
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "../styles/Shipping.module.css";
 
 //if isLoggedIn? === true...
@@ -8,7 +8,7 @@ import styles from "../styles/Shipping.module.css";
 
 //add Nav to Confirm Address Button
 
-const Shipping = ({ cart }) => {
+const Shipping = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -19,7 +19,7 @@ const Shipping = ({ cart }) => {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     //await dispatch(/*update user with address*/);
-    Navigate("/cart/checkout", { state: cart });
+    Navigate("/cart/checkout");
   };
 
   return (
