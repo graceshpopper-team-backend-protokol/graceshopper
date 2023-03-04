@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 //don't forget to change {puzzle.pieces} to what Sarah names the new attribute
 
 const PuzzleCard = ({ puzzle }) => {
@@ -9,6 +10,7 @@ const PuzzleCard = ({ puzzle }) => {
   const puzzleId = puzzle.id;
 
   const handleAdd = async (ev) => {
+    const dispatch = useDispatch();
     ev.preventDefault();
     dispatch(addOrderItems({ id, puzzleId, orderQTY }));
   };
