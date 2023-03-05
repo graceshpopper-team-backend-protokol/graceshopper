@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrderFromOrderItems, fetchOrderItems, selectOrder } from "../store/orderSlice.js";
+import {
+  deleteOrderItems,
+  fetchOrderItems,
+  selectOrder,
+} from "../store/orderSlice.js";
 import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
 
@@ -11,23 +15,42 @@ const Cart = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const cart = useSelector(selectOrder);
-  const { id } = useParams();
+  const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
     dispatch(fetchOrderItems(id));
   }, [dispatch, id]);
 
+  const orderTotal = () => {
+    let prices = [];
+    cart.forEach((orderItem) => {
+      prices.push(Number(orderItem.puzzle.price)*orderItem.orderQTY)
+    });
+    console.log(prices);
+    let total = 0.00;
+    for (let i = 0; i < prices.length; i++) {
+      total += prices[i]
+    };
+    return total
+  };
+
   const estimateTax = () => {
-    return (cart.order.orderTotal/100)*10
+    const tax = (orderTotal() / 100) * 10;
+    return tax.toFixed(2)
   };
 
   const total = () => {
-    return estimateTax() + cart.order.orderTotal
+    const total = Number(estimateTax()) + orderTotal();
+    return total.toFixed(2)
+  };
+
+  const handleClear = async () => {
+    await dispatch(deleteOrderItems(id));
   };
 
   const handleNav = () => {
     //also pass down user Id through Navigate
-    Navigate("/cart/shipping", { state: cart })
+    Navigate("/cart/shipping", {state: total()});
   };
 
   const RenderCart = () => {
@@ -43,7 +66,7 @@ const Cart = () => {
     }
     return (
       <div>
-        <h1>There are {cart.length} items in your cart.</h1>
+        <h1>There are {cart.length} item(s) in your cart.</h1>
         <section className={styles.itemsLeft}>
           <div className={styles.banner}>
             <h2>Puzzle</h2>
@@ -68,14 +91,14 @@ const Cart = () => {
           <div className={styles.infoContainer}>
             <div>
               <span>Subtotal:</span>
-              <span>${cart.order.orderTotal}</span>
+              <span>${orderTotal()}</span>
             </div>
             <div>
-              <span>Shipping</span>
+              <span>Shipping:</span>
               <span>FREE</span>
             </div>
             <div>
-              <span>Estimated Tax</span>
+              <span>Estimated Tax:</span>
               <span>${estimateTax()}</span>
             </div>
             <div>
@@ -84,6 +107,7 @@ const Cart = () => {
             </div>
           </div>
           <button onClick={handleNav}>Proceed to Shipping</button>
+          <button onClick={handleClear}>Clear Cart</button>
         </section>
       </div>
     );

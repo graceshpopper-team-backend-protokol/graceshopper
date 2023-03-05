@@ -11,10 +11,10 @@ import styles from "../styles/PuzzleDetail.module.css";
 //add AddToCartHandler function and button onClick
 
 const PuzzleDetail = () => {
+  const me = useSelector((state) => state.auth.me);
   const dispatch = useDispatch();
   const puzzle = useSelector(selectSinglePuzzle);
   const { id } = useParams();
-  const puzzleId = puzzle.id;
   const [orderQTY, setOrderQTY] = useState(1);
 
   useEffect(() => {
@@ -29,9 +29,8 @@ const PuzzleDetail = () => {
     return QuantOpts;
   };
 
-  const handleAdd = async (ev) => {
-    ev.preventDefault();
-    dispatch(addOrderItems({ id, puzzleId, orderQTY }));
+  const handleAdd = async () => {
+    dispatch(addOrderItems({ id: me.id, puzzleId: id, orderQTY }));
   };
 
   return (
@@ -43,7 +42,11 @@ const PuzzleDetail = () => {
         <p>{puzzle.price}</p>
       </div>
       <div className={styles.addToCart}>
-        <select className={styles.quantity} value={orderQTY} onChange={(e) => setOrderQTY(e.target.value)}>
+        <select
+          className={styles.quantity}
+          value={orderQTY}
+          onChange={(e) => setOrderQTY(e.target.value)}
+        >
           {QuantityDropDown().map((num) => {
             return (
               <option value={num} id={num}>
