@@ -13,6 +13,14 @@ export const fetchPuzzles = createAsyncThunk("puzzles/allPuzzles", async () => {
   }
 });
 
+export const deletePuzzleAsync = createAsyncThunk(
+  "deletePuzzle",
+  async (id) => {
+    const { data } = await axios.delete(`api/puzzles/${id}`);
+    return data;
+  }
+)
+
 export const allPuzzlesSlice = createSlice({
   name: "puzzles",
   initialState: [],

@@ -19,3 +19,14 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id);
+    await puzzle.destroy();
+
+    res.send(puzzle);
+  } catch(err) {
+    next(err);
+  }
+})
