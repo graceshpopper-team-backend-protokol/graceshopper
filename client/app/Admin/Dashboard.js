@@ -32,14 +32,13 @@ const Dashboard = () => {
                         <p><strong>Description: </strong>{puzzle.description}</p>
                         <p><strong>Number of Pieces: </strong>{puzzle.puzzlePieces}</p>
                         <p><strong>Price: </strong>{puzzle.price}</p>
-                        <p><strong>Puzzle ID:</strong>{puzzle.id}</p>
+                        <p><strong>Puzzle ID: </strong>{puzzle.id}</p>
                         <button id='delete-button' onClick={() => {
                             handlePuzzleDelete(puzzle.id);
                         }}
                         >
                         Delete puzzle
                         </button>
-                        <br></br>
                     </div>
                   );
                 })}
