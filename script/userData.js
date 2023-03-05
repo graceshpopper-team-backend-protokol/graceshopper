@@ -12,11 +12,11 @@ const {
  * @param  {integer} n
  * @returns an array of users
  */
-function createUserArray(n) {
+function createUserArray() {
   let userArray = [];
   userArray.push(createAdmin());
   userArray.push(createTestUser());
-  for (let i = 1; i < n; i++) {
+  for (let i = 1; i < 20; i++) {
     userArray.push(createUser());
   }
   return userArray;
@@ -94,8 +94,7 @@ function createTestUser() {
  */
 async function userSeed() {
   // Creating Users
-  const numUsers = 100;
-  const userArray = createUserArray(numUsers);
+  const userArray = createUserArray();
   const users = await User.bulkCreate(userArray);
 
   return {
