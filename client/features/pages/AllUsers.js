@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers, selectUsers } from "../store/allUsersSlice"
 import UserCard from "../components/UserCard";
-import styles from "../styles/AllUsers.module.css"
+import styles from "../styles/AllUsers.module.css";
 
 const AllUsers = () => {
   const dispatch = useDispatch();
