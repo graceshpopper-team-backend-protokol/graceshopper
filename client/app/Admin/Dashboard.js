@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from '../../features/store/allPuzzlesSlice';
-import PuzzleCard from '../../features/components/PuzzleCard';
+import { deletePuzzleAsync } from '../../features/store/allPuzzlesSlice';
 
 
 const Dashboard = () => {
@@ -13,24 +13,37 @@ const Dashboard = () => {
     dispatch(fetchPuzzles());
   }, [dispatch]);
 
-  console.log(`puzzles from dashboard: ${puzzles}`);
+  const handlePuzzleDelete = async (id) => {
+    console.log(`id from handlePuzzleDelete ${id}`);
+    await dispatch(deletePuzzleAsync(id));
+    await dispatch(fetchPuzzles());
+  };
 
     return(
         <div>
             <h1>Dashboard</h1>
             <div className="dashboard">
-                {puzzles?.map((puzzle) => {
+                <strong>Edit Puzzles</strong>
+                <ol>
+                {puzzles.map((puzzle) => {
                 return (
                     <div>
-                        <p>{puzzle.name}</p>
-                        <p>{puzzle.description}</p>
-                        <p>{puzzle.puzzlePieces}</p>
-                        <p>{puzzle.price}</p>
-                        <p>{puzzle.imgUrl}</p>
+                        <p><strong>Name: </strong>{puzzle.name}</p>
+                        <p><strong>Description: </strong>{puzzle.description}</p>
+                        <p><strong>Number of Pieces: </strong>{puzzle.puzzlePieces}</p>
+                        <p><strong>Price: </strong>{puzzle.price}</p>
+                        <p><strong>Puzzle ID:</strong>{puzzle.id}</p>
+                        <button id='delete-button' onClick={() => {
+                            handlePuzzleDelete(puzzle.id);
+                        }}
+                        >
+                        Delete puzzle
+                        </button>
+                        <br></br>
                     </div>
                   );
                 })}
-                
+                </ol>
             </div>
         </div>
     );
