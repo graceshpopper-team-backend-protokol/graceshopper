@@ -49,7 +49,7 @@ const AppRoutes = () => {
             <Route path="/cart/confirmation" element={<Confirmation />} />
             <Route path="/cart/checkout" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
-            <Route path="/cart" element={<Cart />} />{" "}
+            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
             <Route to="/home" element={<Home />} />
@@ -59,6 +59,10 @@ const AppRoutes = () => {
       ) : (
         // Routes for not logged in users
         <Routes>
+          <Route path="/cart/confirmation" element={<Confirmation />} />
+          <Route path="/cart/checkout" element={<Checkout />} />
+          <Route path="/cart/shipping" element={<Shipping />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}

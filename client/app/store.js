@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+import { configureStore } from "@reduxjs/toolkit";
+import logger from "redux-logger";
 
-import authReducer from '../features/auth/authSlice';
-import allPuzzlesSlice from "../features/store/allPuzzlesSlice"; 
+import authReducer from "../features/auth/authSlice";
+import allPuzzlesSlice from "../features/store/allPuzzlesSlice";
 import singlePuzzleSlice from "../features/store/singlePuzzleSlice";
 import allUsersSlice from "../features/store/allUsersSlice";
 import singleUserSlice from "../features/store/singleUserSlice";
@@ -15,10 +15,10 @@ const store = configureStore({
     singlePuzzle: singlePuzzleSlice,
     users: allUsersSlice,
     singleUser: singleUserSlice,
-    order: orderSlice, 
+    order: orderSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  });
+});
 
 export default store;
-export * from '../features/auth/authSlice';
+export * from "../features/auth/authSlice";

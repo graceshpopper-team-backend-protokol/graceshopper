@@ -5,7 +5,7 @@ import {
   fetchSinglePuzzle,
   selectSinglePuzzle,
 } from "../store/singlePuzzleSlice";
-import { addOrderItems } from "../store/orderSlice";
+import { addOrderItems, addItems } from "../store/orderSlice";
 import styles from "../styles/PuzzleDetail.module.css";
 
 //add AddToCartHandler function and button onClick
@@ -30,7 +30,11 @@ const PuzzleDetail = () => {
   };
 
   const handleAdd = async () => {
-    dispatch(addOrderItems({ id: me.id, puzzleId: id, orderQTY }));
+    if (!me.id) {
+      dispatch(addItems({ puzzleId: id, orderQTY, puzzle }));
+    } else {
+      dispatch(addOrderItems({ id: me.id, puzzleId: id, orderQTY }));
+    }
   };
 
   return (
