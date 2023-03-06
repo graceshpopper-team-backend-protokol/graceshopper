@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createOrderFromOrderItems,
+  createGuestOrder,
   fetchOrderItems,
   selectOrder,
+  fetchItems,
 } from "../store/orderSlice.js";
 import styles from "../styles/Checkout.module.css";
+import { selectSingleUser } from "../store/singleUserSlice.js";
 
 //Confirm Order button onClick- function that turns order from PENDING to ORDER
 //Confirm Order button onClick- connect to Stripe for payment
@@ -15,34 +18,38 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const cart = useSelector(selectOrder);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const { id } = useSelector((state) => state.auth.me);
+  const singleUser = useSelector(selectSingleUser);
 
   const estimateTax = () => {
     const tax = (orderTotal() / 100) * 10;
-    return tax.toFixed(2)
+    return tax.toFixed(2);
   };
 
   const orderTotal = () => {
     let prices = [];
     cart.forEach((orderItem) => {
-      prices.push(Number(orderItem.puzzle.price)*orderItem.orderQTY)
+      prices.push(Number(orderItem.puzzle.price) * orderItem.orderQTY);
     });
-    console.log(prices);
-    let total = 0.00;
+    let total = 0.0;
     for (let i = 0; i < prices.length; i++) {
-      total += prices[i]
-    };
-    return total
+      total += prices[i];
+    }
+    return total;
   };
 
   const total = () => {
     const total = Number(estimateTax()) + orderTotal();
-    return total.toFixed(2)
+    return total.toFixed(2);
   };
 
-  console.log(cart);
   useEffect(() => {
-    dispatch(fetchOrderItems(id));
+    if (!isLoggedIn) {
+      dispatch(fetchItems());
+    } else {
+      dispatch(fetchOrderItems(id));
+    }
   }, [dispatch, id]);
 
   const checkout = async () => {
@@ -62,8 +69,19 @@ const Checkout = () => {
     //     }
     //   });
     // fix order total depending on what is being ordered
-    await dispatch(createOrderFromOrderItems({ id, orderTotal: total() }));
-    Navigate("/cart/confirmation");
+    if (!isLoggedIn) {
+      await dispatch(
+        createGuestOrder({
+          userId: singleUser.id,
+          orderTotal: total(),
+          cart,
+        })
+      );
+      Navigate("/cart/confirmation");
+    } else {
+      await dispatch(createOrderFromOrderItems({ id, orderTotal: total() }));
+      Navigate("/cart/confirmation");
+    }
   };
 
   return (
