@@ -92,14 +92,16 @@ const EditPuzzle = () => {
                     cols='70'
                 ></textarea>
                 <label htmlFor='puzzlePieces'>
-                    <strong>New Number of Pieces:</strong>
+                    <strong>Number of Pieces:</strong>
+                    <div className="select-options">
+                        <select name="sort" onChange={(event) => (setPuzzlePieces(event.target.value))}>
+                        <option value="null"> </option>
+                        <option value="250 pieces">250 pieces</option>
+                        <option value="500 pieces">500 pieces</option>
+                        <option value="1000 pieces">1000 pieces</option>
+                        </select>
+                    </div>
                 </label>
-                <input 
-                    type='number'
-                    name='puzzlePieces'
-                    value={puzzlePieces}
-                    onChange={(event) => (setPuzzlePieces(event.target.value))}
-                ></input>
                 <label htmlFor='price'>
                     <strong>New Price:</strong>
                 </label>
