@@ -20,6 +20,15 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id)
+    res.json(await puzzle.update(req.body))
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:id', async (req, res, next) => {
   try {
     const puzzle = await Puzzle.findByPk(req.params.id);

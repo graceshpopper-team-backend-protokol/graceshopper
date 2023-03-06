@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from '../../features/store/allPuzzlesSlice';
 import { deletePuzzleAsync } from '../../features/store/allPuzzlesSlice';
+import { Link } from 'react-router-dom';
 
 
 const Dashboard = () => {
@@ -22,17 +23,24 @@ const Dashboard = () => {
     return(
         <div>
             <h1>Dashboard</h1>
+            
             <div className="dashboard">
+    
                 <strong>Edit Puzzles</strong>
                 <ol>
                 {puzzles.map((puzzle) => {
                 return (
                     <div>
+                        
                         <p><strong>Name: </strong>{puzzle.name}</p>
                         <p><strong>Description: </strong>{puzzle.description}</p>
                         <p><strong>Number of Pieces: </strong>{puzzle.puzzlePieces}</p>
                         <p><strong>Price: </strong>{puzzle.price}</p>
                         <p><strong>Puzzle ID: </strong>{puzzle.id}</p>
+                        
+                        <Link to={`/dashboard/puzzles/${puzzle.id}`}>Edit Puzzle
+                        </Link>
+
                         <button id='delete-button' onClick={() => {
                             handlePuzzleDelete(puzzle.id);
                         }}
