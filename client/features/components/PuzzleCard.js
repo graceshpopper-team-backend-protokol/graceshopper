@@ -21,7 +21,7 @@ const PuzzleCard = ({ puzzle }) => {
   return (
     <div className="cardContainer">
       <Link to={`/puzzles/${puzzle.id}`}>
-        <img src={puzzle.imgUrl} />
+        <img src={puzzle.imgURL} />
         <div className="cardText">
           <h1>{puzzle.name}</h1>
           <p>{puzzle.puzzlePieces}</p>
