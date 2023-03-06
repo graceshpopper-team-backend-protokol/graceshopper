@@ -16,7 +16,7 @@ export const fetchSinglePuzzle = createAsyncThunk(
   }
 );
 
-//async thunk to update product in database
+//async thunk to update puzzle in database
 export const updateSinglePuzzle = createAsyncThunk(
   'updatePuzzle',
   async (puzzleData) => {
@@ -24,6 +24,22 @@ export const updateSinglePuzzle = createAsyncThunk(
       const { data } = await axios.put(
         `/api/puzzles/${puzzleData.id}`,
         puzzleData
+      );
+      return data;
+    }catch(err) {
+      console.error(err)
+    }
+  }
+);
+
+//async thunk to add new puzzle to database
+export const createPuzzle = createAsyncThunk(
+  'addPuzzle',
+  async (newPuzzle) => {
+    try {
+      const { data } = await axios.post(
+        '/api/puzzles', 
+        newPuzzle
       );
       return data;
     }catch(err) {
@@ -43,6 +59,9 @@ export const singlePuzzleSlice = createSlice({
     builder.addCase(updateSinglePuzzle.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(createPuzzle.fulfilled, (state, action) => {
+      return action.payload;
+    })
   },
 });
 
