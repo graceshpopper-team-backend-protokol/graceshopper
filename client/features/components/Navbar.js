@@ -2,6 +2,10 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../app/store";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -19,7 +23,7 @@ const Navbar = () => {
       <nav>
         {isLoggedIn ? (
           isAdmin ? (
-            <div className={styles.container}>
+            <div>
               {/* The navbar will show these links after Admin is logged in */}
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
@@ -36,7 +40,7 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <div className={styles.container}>
+            <div>
               {/* The navbar will show these links after User is logged in */}
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
