@@ -24,10 +24,9 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
+
       <div className="dashboard">
-        <Link to="/dashboard/users">
-          <strong>View Users</strong>
-        </Link>
+        <Link to={`/dashboard/users`}>View Users</Link>
         <strong>Edit Puzzles</strong>
         <ol>
           {puzzles.map((puzzle) => {
@@ -53,6 +52,9 @@ const Dashboard = () => {
                   <strong>Puzzle ID: </strong>
                   {puzzle.id}
                 </p>
+
+                <Link to={`/dashboard/puzzles/${puzzle.id}`}>Edit Puzzle</Link>
+
                 <button
                   id="delete-button"
                   onClick={() => {

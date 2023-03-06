@@ -31,8 +31,6 @@ const User = db.define("user", {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
-    //A 'CUSTOMER' could be a logged in user or a guest
-    //Differentiated by whether or not a password exists
   },
 });
 
