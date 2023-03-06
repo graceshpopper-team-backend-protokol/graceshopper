@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
+import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -15,11 +16,11 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>FS-App-Template</h1>
+      <h1>Backend Protokol Puzzles</h1>
       <nav>
         {isLoggedIn ? (
           isAdmin ? (
-          <div>
+          <div className={styles.container}>
             {/* The navbar will show these links after Admin is logged in */}
                 <Link to="/home">Home</Link>
                 <Link to="/puzzles" className="navLink">Shop</Link>
@@ -30,7 +31,7 @@ const Navbar = () => {
             </button>
           </div>
             ) : (
-          <div>
+          <div className={styles.container}>
             {/* The navbar will show these links after User is logged in */}
                 <Link to="/home">Home</Link>
                 <Link to="/puzzles" className="navLink">Shop</Link>
@@ -41,7 +42,7 @@ const Navbar = () => {
           </div>
         ) 
         ) : (
-          <div>
+          <div className={styles.container}>
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
