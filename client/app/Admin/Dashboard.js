@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from '../../features/store/allPuzzlesSlice';
 import { deletePuzzleAsync } from '../../features/store/allPuzzlesSlice';
-import { Link } from 'react-router-dom';
-
+import AddPuzzle from './AddPuzzle';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const Dashboard = () => {
   }, [dispatch]);
 
   const handlePuzzleDelete = async (id) => {
-    console.log(`id from handlePuzzleDelete ${id}`);
     await dispatch(deletePuzzleAsync(id));
     await dispatch(fetchPuzzles());
   };
@@ -23,10 +22,9 @@ const Dashboard = () => {
     return(
         <div>
             <h1>Dashboard</h1>
-            
             <div className="dashboard">
-    
-                <strong>Edit Puzzles</strong>
+                <AddPuzzle />
+                <h3>Edit Existing Puzzles</h3>
                 <ol>
                 {puzzles.map((puzzle) => {
                 return (
