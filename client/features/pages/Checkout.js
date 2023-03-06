@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,9 +10,9 @@ import {
 } from "../store/orderSlice.js";
 import styles from "../styles/Checkout.module.css";
 import { selectSingleUser } from "../store/singleUserSlice.js";
+import StripeCheckout from 'react-stripe-checkout';
+import axios from "axios";
 
-//Confirm Order button onClick- function that turns order from PENDING to ORDER
-//Confirm Order button onClick- connect to Stripe for payment
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -52,23 +52,36 @@ const Checkout = () => {
     }
   }, [dispatch, id]);
 
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken = (token) => {
+    console.log(token);
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      console.log(stripeToken);
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/stripe",
+          {
+            tokenId: stripeToken.id,
+            amount: total() * 100,
+          }
+        );
+        //checkout();
+        Navigate("/cart/confirmation");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken]);
+
+        
+
   const checkout = async () => {
-    // await fetch(`http://localhost:8080/api/cart/checkout/${id}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ cart }),
-    // })
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((response) => {
-    //     if (response.url) {
-    //       window.location.assign(response.url); //Forwarding user to Stripe
-    //     }
-    //   });
-    // fix order total depending on what is being ordered
     if (!isLoggedIn) {
       await dispatch(
         createGuestOrder({
@@ -77,10 +90,8 @@ const Checkout = () => {
           cart,
         })
       );
-      Navigate("/cart/confirmation");
     } else {
       await dispatch(createOrderFromOrderItems({ id, orderTotal: total() }));
-      Navigate("/cart/confirmation");
     }
   };
 
@@ -106,9 +117,18 @@ const Checkout = () => {
             <span>${total()}</span>
           </div>
         </div>
-        <button variant="success" onClick={checkout}>
-          Confirm Order
-        </button>
+        <StripeCheckout
+              name="Backend Protokol Puzzles"
+              image="https://em-content.zobj.net/source/microsoft-teams/337/puzzle-piece_1f9e9.png"
+              billingAddress
+              shippingAddress
+              amount={total() * 100}
+              token={onToken}
+              stripeKey="pk_test_51MhZmKE8zFmeoXQYlqTnTbKRyX37PqhCKLpqJK1Gw8czZgZA7ldRQJvtw42YVP99UBZIQnatJyYrjors74yG1gDh00mzei90C0"
+              label="Pay with 💳"
+            >
+          <button>Payment Method</button>
+        </StripeCheckout>
       </section>
     </div>
   );
