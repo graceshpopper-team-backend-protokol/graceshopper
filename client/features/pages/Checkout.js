@@ -9,10 +9,12 @@ import {
   fetchItems,
 } from "../store/orderSlice.js";
 import styles from "../styles/Checkout.module.css";
-import { selectSingleUser } from "../store/singleUserSlice.js";
-import StripeCheckout from 'react-stripe-checkout';
+import {
+  selectSingleUser,
+  createOrUpdateUser,
+} from "../store/singleUserSlice.js";
+import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
-
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -55,23 +57,17 @@ const Checkout = () => {
   const [stripeToken, setStripeToken] = useState(null);
 
   const onToken = (token) => {
-    console.log(token);
     setStripeToken(token);
   };
 
   useEffect(() => {
     const makeRequest = async () => {
-      console.log(stripeToken);
       try {
-        const res = await axios.post(
-          "http://localhost:8080/api/stripe",
-          {
-            tokenId: stripeToken.id,
-            amount: total() * 100,
-          }
-        );
-        //checkout();
-        Navigate("/cart/confirmation");
+        const res = await axios.post("http://localhost:8080/api/stripe", {
+          tokenId: stripeToken.id,
+          amount: total() * 100,
+        });
+        checkout(res, stripeToken);
       } catch (err) {
         console.log(err);
       }
@@ -79,9 +75,13 @@ const Checkout = () => {
     stripeToken && makeRequest();
   }, [stripeToken]);
 
-        
-
-  const checkout = async () => {
+  const checkout = async (res, stripeToken) => {
+    await dispatch(
+      createOrUpdateUser({
+        username: stripeToken.email,
+        address: res.data.billing_details.address.line1,
+      })
+    );
     if (!isLoggedIn) {
       await dispatch(
         createGuestOrder({
@@ -93,6 +93,7 @@ const Checkout = () => {
     } else {
       await dispatch(createOrderFromOrderItems({ id, orderTotal: total() }));
     }
+    Navigate("/cart/confirmation");
   };
 
   return (
@@ -118,15 +119,15 @@ const Checkout = () => {
           </div>
         </div>
         <StripeCheckout
-              name="Backend Protokol Puzzles"
-              image="https://em-content.zobj.net/source/microsoft-teams/337/puzzle-piece_1f9e9.png"
-              billingAddress
-              shippingAddress
-              amount={total() * 100}
-              token={onToken}
-              stripeKey="pk_test_51MhZmKE8zFmeoXQYlqTnTbKRyX37PqhCKLpqJK1Gw8czZgZA7ldRQJvtw42YVP99UBZIQnatJyYrjors74yG1gDh00mzei90C0"
-              label="Pay with 💳"
-            >
+          name="Backend Protokol Puzzles"
+          image="https://em-content.zobj.net/source/microsoft-teams/337/puzzle-piece_1f9e9.png"
+          billingAddress
+          shippingAddress
+          amount={total() * 100}
+          token={onToken}
+          stripeKey="pk_test_51MhZmKE8zFmeoXQYlqTnTbKRyX37PqhCKLpqJK1Gw8czZgZA7ldRQJvtw42YVP99UBZIQnatJyYrjors74yG1gDh00mzei90C0"
+          label="Pay with 💳"
+        >
           <button>Payment Method</button>
         </StripeCheckout>
       </section>

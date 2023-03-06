@@ -6,14 +6,8 @@ export const fetchOrderItems = createAsyncThunk(
   "fetchOrderItems",
   async (id) => {
     try {
-      if (!id) {
-        let localCart = localStorage.getItem("order");
-        const data = JSON.parse(localCart);
-        return data;
-      } else {
-        const { data } = await axios.get(`/api/cart/${id}`);
-        return data;
-      }
+      const { data } = await axios.get(`/api/cart/${id}`);
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -97,8 +91,8 @@ export const orderSlice = createSlice({
   initialState: [],
   reducers: {
     fetchItems(state, { payload }) {
-      localStorage.setItem("order", JSON.stringify(state));
-      return payload;
+      const localCart = JSON.parse(localStorage.getItem("order"));
+      return localCart;
     },
     addItems(state, { payload }) {
       //we use findIndex to determine if we already have that item in the cart
