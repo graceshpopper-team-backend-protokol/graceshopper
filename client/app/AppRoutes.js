@@ -36,10 +36,10 @@ const AppRoutes = () => {
             <Route path="/cart/checkout/" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/dashboard/users" element={<AllUsers />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
-            <Route path="/users" element={<AllUsers />} />
             <Route to="/home" element={<Home />} />
             <Route path="/*" element={<Home />} />
           </Routes>
