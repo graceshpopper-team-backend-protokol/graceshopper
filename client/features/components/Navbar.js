@@ -2,10 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../app/store";
+import styles from "../styles/Navbar.module.css"
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -19,12 +16,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>Backend Protokol Puzzles</h1>
+      
       <nav>
         {isLoggedIn ? (
           isAdmin ? (
-            <div>
+            <div className={styles.container}>
               {/* The navbar will show these links after Admin is logged in */}
+              <h1>Backend Protokol Puzzles</h1>
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
                 Shop
@@ -35,13 +33,14 @@ const Navbar = () => {
               <Link to="/dashboard" className="navLink">
                 Dashboard
               </Link>
-              <button type="button" onClick={logoutAndRedirectHome}>
+              <button className={styles.logOut} type="button" onClick={logoutAndRedirectHome}>
                 Logout
               </button>
             </div>
           ) : (
-            <div>
+            <div className={styles.container}>
               {/* The navbar will show these links after User is logged in */}
+              <h1>Backend Protokol Puzzles</h1>
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
                 Shop
@@ -57,6 +56,7 @@ const Navbar = () => {
         ) : (
           <div className={styles.container}>
             {/* The navbar will show these links before you log in */}
+            <h1>Backend Protokol Puzzles</h1>
             <Link to="/home">Home</Link>
             <Link to="/puzzles" className="navLink">
               Shop
@@ -67,7 +67,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   );
 };
