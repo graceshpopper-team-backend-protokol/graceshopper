@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/OrderItemRow.module.css";
-import { editOrderItems } from "../store/orderSlice";
+import { editOrderItems, editItems } from "../store/orderSlice";
 
 const OrderItemCard = ({ orderItem }) => {
   const puzzle = orderItem.puzzle;
@@ -23,10 +23,29 @@ const OrderItemCard = ({ orderItem }) => {
   };
 
   const handleEdit = async () => {
-    if (quantity > 0) {
-      await dispatch(
-        editOrderItems({ id, puzzleId: puzzle.id, orderQTY: quantity })
-      );
+    if (!id) {
+      dispatch(editItems({ puzzleId: puzzle.id, orderQTY: quantity }));
+    } else {
+      if (quantity > 0) {
+        await dispatch(
+          editOrderItems({ id, puzzleId: puzzle.id, orderQTY: quantity })
+        );
+      } else {
+        await dispatch(
+          editOrderItems({
+            id,
+            puzzleId: puzzle.id,
+            orderQTY: quantity,
+            orderId: null,
+          })
+        );
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!id) {
+      dispatch(editItems({ puzzleId: puzzle.id, orderQTY: 0 }));
     } else {
       await dispatch(
         editOrderItems({
@@ -37,16 +56,6 @@ const OrderItemCard = ({ orderItem }) => {
         })
       );
     }
-  };
-  const handleDelete = async () => {
-    await dispatch(
-      editOrderItems({
-        id,
-        puzzleId: puzzle.id,
-        orderQTY: quantity,
-        orderId: null,
-      })
-    );
   };
 
   return (

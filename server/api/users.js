@@ -35,3 +35,24 @@ router.put("/:id/edit", async (req, res, next) => {
     next(err);
   }
 });
+
+router.put("/:username", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { username: req.params.username },
+    });
+    if (user) {
+      res.send(await user.update({ address: req.body.address }));
+    } else {
+      const newUser = await User.create({
+        username: req.params.username,
+        address: req.body.address,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+      });
+      res.send(newUser);
+    }
+  } catch (err) {
+    next(err);
+  }
+});

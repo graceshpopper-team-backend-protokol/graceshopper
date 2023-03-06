@@ -3,7 +3,7 @@ const stripe = require("stripe")(
   "sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN"
 );
 const {
-  models: { Order, OrderItem, Puzzle },
+  models: { Order, OrderItem, Puzzle, User },
 } = require("../db");
 module.exports = router;
 
@@ -223,6 +223,29 @@ router.put("/checkout/:id", async (req, res, next) => {
     res.json(
       await cart.update({ status: "ORDERED", orderTotal: req.body.orderTotal })
     );
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update cart from cart status to order status for guests
+router.post("/checkout/guestcheckout", async (req, res, next) => {
+  try {
+    const newOrder = await Order.create({
+      date: new Date(),
+      orderTotal: req.body.orderTotal,
+      status: "ORDERED",
+      userId: req.body.userId,
+    });
+
+    for (let i = 0; i < req.body.cart.length; i++) {
+      await OrderItem.create({
+        orderQTY: req.body.cart[i].orderQTY,
+        puzzleId: req.body.cart[i].puzzleId,
+        orderId: newOrder.id,
+      });
+    }
+    res.json([]);
   } catch (err) {
     next(err);
   }
