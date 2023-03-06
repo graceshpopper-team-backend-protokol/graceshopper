@@ -1,7 +1,13 @@
 .container {
   position: fixed;
   bottom: 0;
-  height: 65px;
+  height: 55px;
   width: 100%;
   background: linear-gradient(90deg, rgba(105,255,213,1) 0%, rgba(176,255,171,1) 50%, rgba(214,252,69,1) 100%);
+}
+
+.container p {
+  position: fixed;
+  bottom: .2rem; 
+  right: 2rem;
 }
