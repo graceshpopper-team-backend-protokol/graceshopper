@@ -5,10 +5,10 @@ import { fetchPuzzles, selectPuzzles } from '../../features/store/allPuzzlesSlic
 import { deletePuzzleAsync } from '../../features/store/allPuzzlesSlice';
 import AddPuzzle from './AddPuzzle';
 
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const puzzles = useSelector(selectPuzzles);
-  
 
   useEffect(() => {
     dispatch(fetchPuzzles());
@@ -19,11 +19,13 @@ const Dashboard = () => {
     await dispatch(fetchPuzzles());
   };
 
-    return(
-        <div>
-            <h1>Dashboard</h1>
-            <div className="dashboard">
-                <AddPuzzle />
+  return (
+    <div>
+      <h1>Dashboard</h1>
+
+      <div className="dashboard">
+        <Link to={`/dashboard/users`}>View Users</Link>
+         <AddPuzzle />
                 <h3>Edit Existing Puzzles</h3>
                 <ol>
                 {puzzles.map((puzzle) => {
@@ -49,9 +51,9 @@ const Dashboard = () => {
                   );
                 })}
                 </ol>
-            </div>
-        </div>
-    );
-}
+               <div>
+    </div>
+  );
+};
 
 export default Dashboard;

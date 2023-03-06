@@ -12,7 +12,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/237/200/300",
+      imgURL: "https://picsum.photos/id/237/300/200",
       stripeId: "prod_NSaBMb1gUwotPR",
     });
 
@@ -22,7 +22,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/94/200/300",
+      imgURL: "https://picsum.photos/id/94/300/200",
       stripeId: "prod_NSaC5qlBbMFVjp",
     });
 
@@ -32,7 +32,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/95/200/300",
+      imgURL: "https://picsum.photos/id/95/300/200",
       stripeId: "prod_NSaCQg3EacTbUt",
     });
 
@@ -42,7 +42,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/100/200/300",
+      imgURL: "https://picsum.photos/id/100/300/200",
       stripeId: "prod_NSaDNZvoXj3Rgf",
     });
 
@@ -52,7 +52,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/103/200/300",
+      imgURL: "https://picsum.photos/id/103/300/200",
       stripeId: "prod_NSaE5typZqHE7c",
     });
 
@@ -62,7 +62,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/111/200/300",
+      imgURL: "https://picsum.photos/id/111/300/200",
       stripeId: "prod_NSal02iIV44CXw",
     });
 
@@ -72,7 +72,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/110/200/300",
+      imgURL: "https://picsum.photos/id/110/300/200",
       stripeId: "prod_NSaEqCBpDVL1qT",
     });
 
@@ -82,7 +82,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/169/200/300",
+      imgURL: "https://picsum.photos/id/169/300/200",
       stripeId: "prod_NSaGv7AtEqKIaU",
     });
 
@@ -92,7 +92,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/102/200/300",
+      imgURL: "https://picsum.photos/id/102/300/200",
       stripeId: "prod_NSaHLcchLYIfSr",
     });
 
@@ -102,7 +102,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/124/200/300",
+      imgURL: "https://picsum.photos/id/124/300/200",
       stripeId: "prod_NSaHUNKRXjibfz",
     });
 
@@ -112,7 +112,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/136/200/300",
+      imgURL: "https://picsum.photos/id/136/300/200",
       stripeId: "prod_NSaIHaEhn11zby",
     });
 
@@ -122,7 +122,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/146/200/300",
+      imgURL: "https://picsum.photos/id/146/300/200",
       stripeId: "prod_NSaI4OtuA149Ol",
     });
 
@@ -132,7 +132,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/155/200/300",
+      imgURL: "https://picsum.photos/id/155/300/200",
       stripeId: "prod_NSaIZsTH1hvCre",
     });
 
@@ -142,7 +142,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/144/200/300",
+      imgURL: "https://picsum.photos/id/144/300/200",
       stripeId: "prod_NSaJggCzcjDsvG",
     });
 
@@ -152,7 +152,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "250 pieces",
       price: 12.99,
-      imgURL: "https://picsum.photos/id/145/200/300",
+      imgURL: "https://picsum.photos/id/145/300/200",
       stripeId: "prod_NSaJNFN5yJUlsG",
     });
 
@@ -164,7 +164,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/237/200/300",
+      imgURL: "https://picsum.photos/id/237/300/200",
       stripeId: "prod_NSaJH531QgVgWP",
     });
 
@@ -174,7 +174,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/94/200/300",
+      imgURL: "https://picsum.photos/id/94/300/200",
       stripeId: "prod_NSaKzZz7UdAZ38",
     });
 
@@ -184,7 +184,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/95/200/300",
+      imgURL: "https://picsum.photos/id/95/300/200",
       stripeId: "prod_NSaLYudzkDDeuy",
     });
 
@@ -194,7 +194,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/100/200/300",
+      imgURL: "https://picsum.photos/id/100/300/200",
       stripeId: "prod_NSaLL9M0lwmhiY",
     });
 
@@ -204,7 +204,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/103/200/300",
+      imgURL: "https://picsum.photos/id/103/300/200",
       stripeId: "prod_NSaMwk1ThRghoh",
     });
 
@@ -214,7 +214,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/111/200/300",
+      imgURL: "https://picsum.photos/id/111/300/200",
       stripeId: "prod_NSaMP0fpdoDT2c",
     });
 
@@ -224,7 +224,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/110/200/300",
+      imgURL: "https://picsum.photos/id/110/300/200",
       stripeId: "prod_NSaMkNB5zbZpno",
     });
 
@@ -234,7 +234,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/95/200/300",
+      imgURL: "https://picsum.photos/id/95/300/200",
       stripeId: "prod_NSaNbtH2G6ZZBj",
     });
 
@@ -244,7 +244,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/102/200/300",
+      imgURL: "https://picsum.photos/id/102/300/200",
       stripeId: "prod_NSaOwpRhczbi5b",
     });
 
@@ -254,7 +254,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/124/200/300",
+      imgURL: "https://picsum.photos/id/124/300/200",
       stripeId: "prod_NSaODZTF6KOyLS",
     });
 
@@ -264,7 +264,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/136/200/300",
+      imgURL: "https://picsum.photos/id/136/300/200",
       stripeId: "prod_NSaP0IrP0Cr5LI",
     });
 
@@ -274,7 +274,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/146/200/300",
+      imgURL: "https://picsum.photos/id/146/300/200",
       stripeId: "prod_NSaQ2YIV1xsHb9",
     });
 
@@ -284,7 +284,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/155/200/300",
+      imgURL: "https://picsum.photos/id/155/300/200",
       stripeId: "prod_NSaQs7HwVGvtRA",
     });
 
@@ -294,7 +294,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/144/200/300",
+      imgURL: "https://picsum.photos/id/144/300/200",
       stripeId: "prod_NSaRePFyJTCR0D",
     });
 
@@ -304,7 +304,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/145/200/300",
+      imgURL: "https://picsum.photos/id/145/300/200",
       stripeId: "prod_NSaRFTwkOKTx4q",
     });
 
@@ -316,7 +316,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/237/200/300",
+      imgURL: "https://picsum.photos/id/237/300/200",
       stripeId: "prod_NSaW5Kl44O7i2p",
     });
 
@@ -327,7 +327,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/94/200/300",
+      imgURL: "https://picsum.photos/id/94/300/200",
       stripeId: "prod_NSaW21N1CZxkNv",
     });
 
@@ -338,7 +338,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/95/200/300",
+      imgURL: "https://picsum.photos/id/95/300/200",
       stripeId: "prod_NSaXwGF5n1JDVZ",
     });
 
@@ -349,7 +349,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/100/200/300",
+      imgURL: "https://picsum.photos/id/100/300/200",
       stripeId: "prod_NSaZx3gkzm4FEp",
     });
 
@@ -360,7 +360,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/103/200/300",
+      imgURL: "https://picsum.photos/id/103/300/200",
       stripeId: "prod_NSaXvJq4j0ohV8",
     });
 
@@ -371,7 +371,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/111/200/300",
+      imgURL: "https://picsum.photos/id/111/300/200",
       stripeId: "prod_NSaXb099qMmaU1",
     });
 
@@ -382,7 +382,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/110/200/300",
+      imgURL: "https://picsum.photos/id/110/300/200",
       stripeId: "prod_NSaYJHTENjmAPr",
     });
 
@@ -393,7 +393,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/95/200/300",
+      imgURL: "https://picsum.photos/id/95/300/200",
       stripeId: "prod_NSaar9vePhCBcH",
     });
 
@@ -404,7 +404,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/102/200/300",
+      imgURL: "https://picsum.photos/id/102/300/200",
       stripeId: "prod_NSaaXaM0ny3FMG",
     });
 
@@ -415,7 +415,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/124/200/300",
+      imgURL: "https://picsum.photos/id/124/300/200",
       stripeId: "prod_NSabJYABMiXTWR",
     });
 
@@ -426,7 +426,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/136/200/300",
+      imgURL: "https://picsum.photos/id/136/300/200",
       stripeId: "prod_NSabI3ooRasqlL",
     });
 
@@ -437,7 +437,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/146/200/300",
+      imgURL: "https://picsum.photos/id/146/300/200",
       stripeId: "prod_NSabJab2B8Ssok",
     });
 
@@ -448,7 +448,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/155/200/300",
+      imgURL: "https://picsum.photos/id/155/300/200",
       stripeId: "prod_NSabRke4NkXMRq",
     });
 
@@ -459,7 +459,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/144/200/300",
+      imgURL: "https://picsum.photos/id/144/300/200",
       stripeId: "prod_NSacoVLL0t429C",
     });
 
@@ -470,7 +470,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/145/200/300",
+      imgURL: "https://picsum.photos/id/145/300/200",
       stripeId: "prod_NSacGtASnKXhOt",
     });
   } catch (err) {

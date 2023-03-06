@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 
+import styles from "../styles/Navbar.module.css";
+
+
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
@@ -15,6 +18,7 @@ const Navbar = () => {
 
   return (
     <div>
+
       <h1>Backend Protokol Puzzles</h1>
       <nav>
         {isLoggedIn ? (
