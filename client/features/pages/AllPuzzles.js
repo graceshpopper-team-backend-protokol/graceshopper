@@ -4,7 +4,7 @@ import { fetchPuzzles, selectPuzzles } from "../store/allPuzzlesSlice";
 import PuzzleCard from "../components/PuzzleCard";
 import styles from "../styles/AllPuzzles.module.css";
 
-const AllPuzzles = () => {
+const AllPuzzles = (props) => {
   const dispatch = useDispatch();
   const puzzles = useSelector(selectPuzzles);
 
@@ -23,5 +23,6 @@ const AllPuzzles = () => {
     </div>
   );
 };
+
 
 export default AllPuzzles;

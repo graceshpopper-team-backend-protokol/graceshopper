@@ -19,6 +19,7 @@ const Navbar = () => {
 
   return (
     <div>
+
       <h1>Backend Protokol Puzzles</h1>
       <nav>
         {isLoggedIn ? (
