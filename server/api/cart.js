@@ -1,7 +1,4 @@
 const router = require("express").Router();
-const stripe = require("stripe")(
-  "sk_test_51MhZmKE8zFmeoXQYEoTxuO54sSmhyLrqKmbLhyDXpy3AZrKwHLSbzOiTpA8lyykYH2ZQ3GyGSqTWuIFQ6inhSBKZ00ltZQ8MxN"
-);
 const {
   models: { Order, OrderItem, Puzzle, User },
 } = require("../db");
@@ -246,37 +243,6 @@ router.post("/checkout/guestcheckout", async (req, res, next) => {
       });
     }
     res.json([]);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// send cart contents to Stripe for payment
-router.post("/checkout/:id", async (req, res, next) => {
-  try {
-    //stripe wants price instead of id
-    const items = req.body.cart;
-
-    let lineItems = [];
-    items.array.forEach((item) => {
-      lineItems.push({
-        price: item.stripeId,
-        quantity: item.orderQTY,
-      });
-    });
-
-    const session = await stripe.checkout.sessions.create({
-      line_items: lineItems,
-      mode: "payment",
-      success_url: "http://localhost:8080/success",
-      cancel_url: "http://localhost:8080/cancel",
-    });
-
-    res.send(
-      JSON.stringify({
-        url: session.url,
-      })
-    );
   } catch (err) {
     next(err);
   }

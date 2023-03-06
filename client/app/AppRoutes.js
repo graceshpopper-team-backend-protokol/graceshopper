@@ -12,6 +12,7 @@ import Cart from "../features/pages/Cart";
 import Shipping from "../features/pages/Shipping";
 import Checkout from "../features/pages/Checkout";
 import Confirmation from "../features/components/Confirmation";
+import EditPuzzle from "./Admin/EditPuzzle";
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ const AppRoutes = () => {
             <Route path="/cart/checkout/" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/dashboard/puzzles/:id" element={<EditPuzzle />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
