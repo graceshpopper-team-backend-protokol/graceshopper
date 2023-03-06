@@ -48,6 +48,8 @@ const Home = props => {
   return (
     <div>
       <h3>Welcome, {username}!</h3>
+      <img src="https://res.cloudinary.com/graham-media-group/image/fetch/f_auto/q_auto/c_thumb,w_700/https://arc-anglerfish-arc2-prod-gmg.s3.amazonaws.com/public/3ZY5NELK25FVRCE6GNJHN2MV2I.jpg?_a=ATCqVhC0" alt="puzzle pieces"></img>
+      <h1>Tagline For Our Puzzle Store</h1>
       <section className="bestsellers">
        <h1>Best Sellers</h1>
        <PuzzleDisplay puzzles={puzzles}/>
