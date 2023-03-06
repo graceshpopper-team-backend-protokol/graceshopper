@@ -7,7 +7,8 @@ export const fetchOrderItems = createAsyncThunk(
   async (id) => {
     try {
       if (!id) {
-        const data = JSON.parse(localStorage.getItem("order"));
+        let localCart = localStorage.getItem("order");
+        const data = JSON.parse(localCart);
         return data;
       } else {
         const { data } = await axios.get(`/api/cart/${id}`);
@@ -96,6 +97,7 @@ export const orderSlice = createSlice({
   initialState: [],
   reducers: {
     fetchItems(state, { payload }) {
+      localStorage.setItem("order", JSON.stringify(state));
       return payload;
     },
     addItems(state, { payload }) {

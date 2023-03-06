@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createOrderFromOrderItems,
@@ -9,16 +9,18 @@ import {
   fetchItems,
 } from "../store/orderSlice.js";
 import styles from "../styles/Checkout.module.css";
+import { selectSingleUser } from "../store/singleUserSlice.js";
 
 //Confirm Order button onClick- function that turns order from PENDING to ORDER
 //Confirm Order button onClick- connect to Stripe for payment
 
-const Checkout = (username) => {
+const Checkout = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const cart = useSelector(selectOrder);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const { id } = useSelector((state) => state.auth.me);
-  const { email } = username;
+  const singleUser = useSelector(selectSingleUser);
 
   const estimateTax = () => {
     const tax = (orderTotal() / 100) * 10;
@@ -43,7 +45,7 @@ const Checkout = (username) => {
   };
 
   useEffect(() => {
-    if (!id) {
+    if (!isLoggedIn) {
       dispatch(fetchItems());
     } else {
       dispatch(fetchOrderItems(id));
@@ -67,10 +69,10 @@ const Checkout = (username) => {
     //     }
     //   });
     // fix order total depending on what is being ordered
-    if (!id) {
+    if (!isLoggedIn) {
       await dispatch(
         createGuestOrder({
-          username: email,
+          userId: singleUser.id,
           orderTotal: total(),
           cart,
         })

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/Shipping.module.css";
 import AuthForm from "../auth/AuthForm";
+import { createOrUpdateUser } from "../store/singleUserSlice";
 
 //if isLoggedIn? === true...
 //fetch User (and fill in shipping address saved to account)
@@ -16,12 +17,15 @@ const Shipping = () => {
   const [address, setAddress] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("email");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    //await dispatch(/*update user with address*/);
-    Navigate("/cart/checkout", { username: { email } });
+    await dispatch(
+      createOrUpdateUser({ username: email, address, firstName, lastName })
+    );
+
+    Navigate(`/cart/checkout/`);
   };
 
   return (

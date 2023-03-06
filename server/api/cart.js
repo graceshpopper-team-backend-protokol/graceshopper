@@ -229,48 +229,23 @@ router.put("/checkout/:id", async (req, res, next) => {
 });
 
 // update cart from cart status to order status for guests
-router.post("/checkout/guestcheckout/", async (req, res, next) => {
+router.post("/checkout/guestcheckout", async (req, res, next) => {
   try {
-    const username = req.body.username;
-    const user = await User.findAll({
-      where: { username },
+    const newOrder = await Order.create({
+      date: new Date(),
+      orderTotal: req.body.orderTotal,
+      status: "ORDERED",
+      userId: req.body.userId,
     });
 
-    if (!user) {
-      const newUser = await User.create({ username: req.body.username });
-      const token = newUser.generateToken();
-      const { id } = await jwt.verify(token, JWT);
-      const newOrder = await Order.create({
-        date: new Date(),
-        orderTotal: req.body.orderTotal,
-        status: "ORDERED",
-        userId: id,
+    for (let i = 0; i < req.body.cart.length; i++) {
+      await OrderItem.create({
+        orderQTY: req.body.cart[i].orderQTY,
+        puzzleId: req.body.cart[i].puzzleId,
+        orderId: newOrder.id,
       });
-
-      for (let i = 0; i < req.body.cart.length; i++) {
-        await OrderItem.create({
-          orderQTY: req.body.cart[i].orderQTY,
-          puzzleId: req.body.cart[i].puzzleId,
-          orderId: newOrder.id,
-        });
-      }
-    } else {
-      const token = user.generateToken();
-      const { id } = await jwt.verify(token, JWT);
-      const newOrder = await Order.create({
-        date: new Date(),
-        orderTotal: req.body.orderTotal,
-        status: "ORDERED",
-        userId: id,
-      });
-      for (let i = 0; i < req.body.cart.length; i++) {
-        await OrderItem.create({
-          orderQTY: req.body.cart[i].orderQTY,
-          puzzleId: req.body.cart[i].puzzleId,
-          orderId: newOrder.id,
-        });
-      }
     }
+    res.json([]);
   } catch (err) {
     next(err);
   }

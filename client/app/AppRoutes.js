@@ -33,7 +33,7 @@ const AppRoutes = () => {
           // Routes for Admin only - otherwise redirected to homepage
           <Routes>
             <Route path="/cart/confirmation" element={<Confirmation />} />
-            <Route path="/cart/checkout" element={<Checkout />} />
+            <Route path="/cart/checkout/" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -47,7 +47,7 @@ const AppRoutes = () => {
           // Routes for Logged in users
           <Routes>
             <Route path="/cart/confirmation" element={<Confirmation />} />
-            <Route path="/cart/checkout" element={<Checkout />} />
+            <Route path="/cart/checkout/" element={<Checkout />} />
             <Route path="/cart/shipping" element={<Shipping />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
@@ -60,7 +60,7 @@ const AppRoutes = () => {
         // Routes for not logged in users
         <Routes>
           <Route path="/cart/confirmation" element={<Confirmation />} />
-          <Route path="/cart/checkout" element={<Checkout />} />
+          <Route path="/cart/checkout/" element={<Checkout />} />
           <Route path="/cart/shipping" element={<Shipping />} />
           <Route path="/cart" element={<Cart />} />
           <Route
