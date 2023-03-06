@@ -59,7 +59,7 @@ const Cart = () => {
 
   const handleNav = () => {
     //also pass down user Id through Navigate
-    Navigate("/cart/shipping");
+    Navigate("/cart/checkout");
   };
 
   const RenderCart = () => {
@@ -115,7 +115,7 @@ const Cart = () => {
               <span>${total()}</span>
             </div>
           </div>
-          <button onClick={handleNav}>Proceed to Shipping</button>
+          <button onClick={handleNav}>Proceed to Checkout</button>
           <button onClick={handleClear}>Clear Cart</button>
         </section>
       </div>
