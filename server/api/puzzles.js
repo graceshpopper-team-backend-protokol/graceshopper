@@ -16,6 +16,34 @@ router.get('/:id', async (req, res, next) => {
     const puzzle = await Puzzle.findByPk(req.params.id)
     res.json(puzzle)
   } catch (err) {
-    next(err)
+    next(err);
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id)
+    res.json(await puzzle.update(req.body))
+  } catch (err) {
+    next(err);
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    res.status(201).send(await Puzzle.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const puzzle = await Puzzle.findByPk(req.params.id);
+    await puzzle.destroy();
+
+    res.send(puzzle);
+  } catch(err) {
+    next(err);
   }
 })

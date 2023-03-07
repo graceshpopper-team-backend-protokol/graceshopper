@@ -9,9 +9,9 @@ import PuzzleDetail from "../features/pages/PuzzleDetail";
 import AllPuzzles from "../features/pages/AllPuzzles";
 import AllUsers from "../features/pages/AllUsers";
 import Cart from "../features/pages/Cart";
-import Shipping from "../features/pages/Shipping";
 import Checkout from "../features/pages/Checkout";
 import Confirmation from "../features/components/Confirmation";
+import EditPuzzle from "./Admin/EditPuzzle";
 
 /**
  * COMPONENT
@@ -33,13 +33,13 @@ const AppRoutes = () => {
           // Routes for Admin only - otherwise redirected to homepage
           <Routes>
             <Route path="/cart/confirmation" element={<Confirmation />} />
-            <Route path="/cart/checkout" element={<Checkout />} />
-            <Route path="/cart/shipping" element={<Shipping />} />
+            <Route path="/cart/checkout/" element={<Checkout />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/dashboard/users" element={<AllUsers />} />
+            <Route path="/dashboard/puzzles/:id" element={<EditPuzzle />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
-            <Route path="/users" element={<AllUsers />} />
             <Route to="/home" element={<Home />} />
             <Route path="/*" element={<Home />} />
           </Routes>
@@ -47,9 +47,8 @@ const AppRoutes = () => {
           // Routes for Logged in users
           <Routes>
             <Route path="/cart/confirmation" element={<Confirmation />} />
-            <Route path="/cart/checkout" element={<Checkout />} />
-            <Route path="/cart/shipping" element={<Shipping />} />
-            <Route path="/cart" element={<Cart />} />{" "}
+            <Route path="/cart/checkout/" element={<Checkout />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/puzzles/:id" element={<PuzzleDetail />} />
             <Route path="/puzzles" element={<AllPuzzles />} />
             <Route to="/home" element={<Home />} />
@@ -59,6 +58,9 @@ const AppRoutes = () => {
       ) : (
         // Routes for not logged in users
         <Routes>
+          <Route path="/cart/confirmation" element={<Confirmation />} />
+          <Route path="/cart/checkout/" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}

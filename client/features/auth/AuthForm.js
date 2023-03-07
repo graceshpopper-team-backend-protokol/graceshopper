@@ -12,6 +12,11 @@ import { authenticate } from "../../app/store";
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = () => {
+    navigate('/home')
+  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -37,7 +42,7 @@ const AuthForm = ({ name, displayName }) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <button type="submit" onSubmit={redirect}>{displayName}</button>
         </div>
         {error && <div> {error} </div>}
       </form>

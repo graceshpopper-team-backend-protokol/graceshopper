@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteOrderItems,
+  fetchItems,
   fetchOrderItems,
   selectOrder,
+  clearItems,
 } from "../store/orderSlice.js";
 import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
@@ -18,43 +20,50 @@ const Cart = () => {
   const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
-    dispatch(fetchOrderItems(id));
+    if (!id) {
+      dispatch(fetchItems());
+    } else {
+      dispatch(fetchOrderItems(id));
+    }
   }, [dispatch, id]);
 
   const orderTotal = () => {
     let prices = [];
     cart.forEach((orderItem) => {
-      prices.push(Number(orderItem.puzzle.price)*orderItem.orderQTY)
+      prices.push(Number(orderItem.puzzle.price) * orderItem.orderQTY);
     });
-    console.log(prices);
-    let total = 0.00;
+    let total = 0.0;
     for (let i = 0; i < prices.length; i++) {
-      total += prices[i]
-    };
-    return total
+      total += prices[i];
+    }
+    return total;
   };
 
   const estimateTax = () => {
     const tax = (orderTotal() / 100) * 10;
-    return tax.toFixed(2)
+    return tax.toFixed(2);
   };
 
   const total = () => {
     const total = Number(estimateTax()) + orderTotal();
-    return total.toFixed(2)
+    return total.toFixed(2);
   };
 
   const handleClear = async () => {
-    await dispatch(deleteOrderItems(id));
+    if (!id) {
+      dispatch(clearItems());
+    } else {
+      await dispatch(deleteOrderItems(id));
+    }
   };
 
   const handleNav = () => {
     //also pass down user Id through Navigate
-    Navigate("/cart/shipping", {state: total()});
+    Navigate("/cart/checkout");
   };
 
   const RenderCart = () => {
-    if (!cart) {
+    if (!cart.length) {
       return (
         <div>
           <h1>Your cart is empty.</h1>
@@ -106,7 +115,7 @@ const Cart = () => {
               <span>${total()}</span>
             </div>
           </div>
-          <button onClick={handleNav}>Proceed to Shipping</button>
+          <button onClick={handleNav}>Proceed to Checkout</button>
           <button onClick={handleClear}>Clear Cart</button>
         </section>
       </div>

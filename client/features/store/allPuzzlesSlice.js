@@ -13,6 +13,31 @@ export const fetchPuzzles = createAsyncThunk("puzzles/allPuzzles", async () => {
   }
 });
 
+//async thunk to delete puzzle from database
+export const deletePuzzleAsync = createAsyncThunk(
+  "deletePuzzle",
+  async (id) => {
+    const { data } = await axios.delete(`api/puzzles/${id}`);
+    return data;
+  }
+);
+
+//async thunk to update product in database
+// export const updateSinglePuzzle = createAsyncThunk(
+//   'updatePuzzle',
+//   async (puzzleData) => {
+//     try {
+//       const { data } = await axios.put(
+//         `/api/puzzles/$(puzzleData.id)`,
+//         puzzleData
+//       );
+//       return data;
+//     }catch(err) {
+//       console.error(err)
+//     }
+//   }
+// );
+
 export const allPuzzlesSlice = createSlice({
   name: "puzzles",
   initialState: [],

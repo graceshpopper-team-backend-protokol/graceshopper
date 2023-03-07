@@ -4,6 +4,8 @@ module.exports = router;
 router.use("/users", require("./users"));
 router.use("/puzzles", require("./puzzles"));
 router.use("/cart", require("./cart"));
+router.use("/dashboard", require("./dashboard"));
+router.use("/stripe", require("./stripe"));
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");
