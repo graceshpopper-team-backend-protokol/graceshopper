@@ -108,31 +108,27 @@ const Cart = () => {
       );
     }
     return (
-      <div className={styles.container}>
-        <div className={styles.leftSide}>
-          <h1 className={styles.cartHeader}>
-            There are {cart?.length} item(s) in your cart.
-          </h1>
-          <section className={styles.itemsLeft}>
-            <div className={styles.banner}>
-              <h2>Puzzle</h2>
-              <h2>Puzzle Price</h2>
-              <h2>Quantity</h2>
-              <h2>Total Price</h2>
-            </div>
-            <section className={styles.items}>
-              {cart.map((orderItem) => {
-                return (
-                  <OrderItemRow
-                    key={orderItem.id}
-                    id={orderItem.id}
-                    orderItem={orderItem}
-                  />
-                );
-              })}
-            </section>
+      <div>
+        <h1>There are {cart.length} item(s) in your cart.</h1>
+        <section className={styles.itemsLeft}>
+          <div className={styles.banner}>
+            <h2>Puzzle</h2>
+            <h2>Puzzle Price</h2>
+            <h2>Quantity</h2>
+            <h2>Total Price</h2>
+          </div>
+          <section className={styles.items}>
+            {cart.map((orderItem) => {
+              return (
+                <OrderItemRow
+                  key={orderItem.id}
+                  id={orderItem.id}
+                  orderItem={orderItem}
+                />
+              );
+            })}
           </section>
-        </div>
+        </section>
         <section className={styles.summaryRight}>
           <h1>Order Summary</h1>
           <div className={styles.infoContainer}>
