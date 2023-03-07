@@ -3,7 +3,7 @@ import styles from "../styles/Footer.module.css";
 
 const Footer = () => {
   return (
-  <div className={styles.container}>
+  <div id="footer" className={styles.container}>
     <p>© 2023 Backend Protokol Puzzles</p>
   </div>
   );
