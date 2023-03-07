@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 5rem;
+}
+
+.container h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 38px;
+    text-align: center; 
+}
+
+.container a {
+    color: black;
+}
+
+.container button {
+    border: none;
+    background-color: mediumaquamarine;
+    color: white;
+    height: 40px;
+    width: 75px;
+    margin-top: 1rem;
+    margin-right: 4rem;
+    border-radius: 5px;
+  }
