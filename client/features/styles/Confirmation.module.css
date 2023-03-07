@@ -1,10 +1,9 @@
 .container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100px;
     width: 100%;
-    /* background: linear-gradient(90deg, rgba(105,255,213,1) 0%, rgba(176,255,171,1) 50%, rgba(214,252,69,1) 100%); */
     border: none;
     margin-top: 20rem;
     position: sticky;
