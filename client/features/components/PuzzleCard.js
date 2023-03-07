@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { addOrderItems, addItems } from "../store/orderSlice";
+import styles from "../styles/PuzzleCard.module.css";
 //don't forget to change {puzzle.pieces} to what Sarah names the new attribute
 
 const PuzzleCard = ({ puzzle }) => {

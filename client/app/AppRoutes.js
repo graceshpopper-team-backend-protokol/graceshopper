@@ -10,7 +10,7 @@ import AllPuzzles from "../features/pages/AllPuzzles";
 import AllUsers from "../features/pages/AllUsers";
 import Cart from "../features/pages/Cart";
 import Checkout from "../features/pages/Checkout";
-import Confirmation from "../features/components/Confirmation";
+import Confirmation from "../features/pages/Confirmation";
 import EditPuzzle from "./Admin/EditPuzzle";
 
 /**
