@@ -3,6 +3,18 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  position: relative;
+  min-height: 100vh;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#app {
+  padding-bottom: 5rem; 
 }
 
 a {
