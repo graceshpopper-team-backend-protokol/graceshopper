@@ -2,12 +2,13 @@
 
 const db = require("./db");
 
+// model imports
 const User = require("./models/User");
 const Puzzle = require("./models/Puzzle");
 const Order = require("./models/Order");
 const OrderItem = require("./models/OrderItem");
 
-//associations could go here!
+//associations for all models
 Order.hasMany(OrderItem);
 OrderItem.belongsTo(Order);
 

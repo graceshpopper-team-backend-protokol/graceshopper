@@ -1,15 +1,15 @@
+// API routes for users - mounted on /api/users
+
 const router = require("express").Router();
 const {
   models: { User },
 } = require("../db");
 module.exports = router;
 
+// GET route for users - serves all users including their details except for their password
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: [
         "id",
         "username",
@@ -25,6 +25,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET route for single user - when sending a specific id we are serving the user based on their id
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -34,6 +35,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// PUT route for single user - allows users to be updated based on their id
 router.put("/:id/edit", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -43,6 +45,7 @@ router.put("/:id/edit", async (req, res, next) => {
   }
 });
 
+// PUT route for single user - allows users to be updated based on their username
 router.put("/:username", async (req, res, next) => {
   try {
     const user = await User.findOne({
