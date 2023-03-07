@@ -15,6 +15,7 @@ const AllUsers = () => {
   return (
     <div className={styles.container}>
       <h1>All Users</h1>
+      <hr/>
       <div className={styles.userMap}>
         {users?.map((user) => {
           return (
