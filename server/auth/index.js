@@ -1,3 +1,4 @@
+// API routes for the authorization piece
 const router = require("express").Router();
 const {
   models: { User },
@@ -5,6 +6,8 @@ const {
 
 module.exports = router;
 
+// login route - authenticates the user based on the class method from the user model
+// allows users to log in or throws an error
 router.post("/login", async (req, res, next) => {
   try {
     res.send({ token: await User.authenticate(req.body) });
@@ -14,6 +17,8 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+// signup route - creates the User instance in the database, generates a token
+// confirms if the username already exists in the database and throws an error
 router.post("/signup", async (req, res, next) => {
   try {
     const user = await User.create(req.body);
@@ -28,15 +33,19 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
+// logout route
+// removes token from localstorage
+// clears the session and redirects the client to the homepage
 router.post("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
   res.redirect("/");
 });
 
+// authenticate me route
+// finds user based on the findByToken User class method
 router.get("/me", async (req, res, next) => {
   try {
-    //console.log(req.headers.authorization)
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);

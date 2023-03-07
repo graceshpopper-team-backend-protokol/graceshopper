@@ -1,15 +1,11 @@
+// demo data to seed database with userdata
 const { faker } = require("@faker-js/faker");
 const {
-  db,
   models: { User },
 } = require("../server/db");
 
-//This will create fakeData to seed the database
-
-//Users
-
 /**
- * @param  {integer} n
+ * function that creates a userarray based on the demo data provided below
  * @returns an array of users
  */
 function createUserArray() {
@@ -23,7 +19,8 @@ function createUserArray() {
 }
 
 /**
- * @returns a fake user object
+ * creates a fake user with details from the faker library
+ * @returns {object} a fake user object
  */
 function createUser() {
   const password = faker.internet.password();
@@ -47,7 +44,8 @@ function createUser() {
 }
 
 /**
- * @returns an admin object
+ * creates a fake admin to test database options
+ * @returns {object} an admin object
  */
 function createAdmin() {
   const password = "administrator123";
@@ -68,7 +66,8 @@ function createAdmin() {
 }
 
 /**
- * @returns a test user object to test user login
+ * creates a fake user to test database options
+ * @returns {object} a test user object to test user login
  */
 function createTestUser() {
   const password = "test123";

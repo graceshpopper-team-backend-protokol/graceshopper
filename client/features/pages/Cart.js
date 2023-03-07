@@ -25,9 +25,9 @@ const Cart = () => {
       dispatch(fetchItems());
     } else {
       const localCart = JSON.parse(localStorage.getItem("order"));
-      if (localCart.length > 0) {
+      if (localCart && localCart.length) {
         //add all local items into user cart
-        for (const item of cart) {
+        for (const item of localCart) {
           dispatch(
             addOrderItems({
               id,
@@ -80,7 +80,7 @@ const Cart = () => {
   };
 
   const RenderCart = () => {
-    if (!cart.length) {
+    if (!cart && !cart.length) {
       return (
         <div>
           <h1>Your cart is empty.</h1>
@@ -92,7 +92,7 @@ const Cart = () => {
     }
     return (
       <div>
-        <h1>There are {cart.length} item(s) in your cart.</h1>
+        <h1>There are {cart?.length} item(s) in your cart.</h1>
         <section className={styles.itemsLeft}>
           <div className={styles.banner}>
             <h2>Puzzle</h2>

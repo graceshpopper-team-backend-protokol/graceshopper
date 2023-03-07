@@ -1,3 +1,5 @@
+// Puzzle model with name, description, stockQty, imgUrl, puzzlePieces and stripeId
+
 const Sequelize = require("sequelize");
 const db = require("../db");
 
@@ -18,19 +20,19 @@ const Puzzle = db.define("puzzle", {
   },
   imgURL: {
     type: Sequelize.STRING,
-    defaultValue: 'https://picsum.photos/200'
+    defaultValue: "https://picsum.photos/200",
   },
   puzzlePieces: {
-    type: Sequelize.ENUM(['250 pieces', '500 pieces', '1000 pieces']),
+    type: Sequelize.ENUM(["250 pieces", "500 pieces", "1000 pieces"]),
     allowNull: false,
   },
   price: {
-    type: Sequelize.DECIMAL(10,2),
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
   stripeId: {
     type: Sequelize.STRING,
-  }
+  },
 });
 
 module.exports = Puzzle;
