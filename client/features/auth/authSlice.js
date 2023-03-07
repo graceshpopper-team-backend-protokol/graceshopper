@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const TOKEN = "token";
+
 /**
  * async thunk that authorizes a user through an AJAX request
  * receives the token from local storage when user is logged in
@@ -8,7 +10,7 @@ import axios from "axios";
  * @catches error if database request goes wrong
  */
 export const me = createAsyncThunk("auth/me", async () => {
-  const token = window.localStorage.getItem("token");
+  const token = window.localStorage.getItem(TOKEN);
   try {
     if (token) {
       const res = await axios.get("/auth/me", {
