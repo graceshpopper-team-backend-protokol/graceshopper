@@ -4,10 +4,15 @@ import { fetchPuzzles, selectPuzzles } from "../store/allPuzzlesSlice";
 import PuzzleCard from "../components/PuzzleCard";
 import styles from "../styles/AllPuzzles.module.css";
 
-const AllPuzzles = (props) => {
+/**
+ * Component for all puzzles
+ * @component shows all puzzles on the shop page
+ */
+const AllPuzzles = () => {
   const dispatch = useDispatch();
   const puzzles = useSelector(selectPuzzles);
 
+  // fetches puzzles on load
   useEffect(() => {
     dispatch(fetchPuzzles());
   }, [dispatch]);
@@ -23,6 +28,5 @@ const AllPuzzles = (props) => {
     </div>
   );
 };
-
 
 export default AllPuzzles;

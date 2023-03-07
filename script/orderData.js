@@ -1,10 +1,11 @@
+// demo data to seed database with orderitems and orders
 const { faker } = require("@faker-js/faker");
 const {
   models: { Order, OrderItem },
 } = require("../server/db");
 
 /**
- * bulkcreates orders and orderitems in the database
+ * function that bulkcreates 30 orders and 33 orderitems in the database
  */
 async function orderSeed() {
   // Creating orders

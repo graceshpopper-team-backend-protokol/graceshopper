@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createOrderFromOrderItems,
@@ -16,6 +16,10 @@ import {
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
+/**
+ * Component to checkout
+ * @component shows an order confirmation page that leads to stripe
+ */
 const Checkout = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -24,11 +28,19 @@ const Checkout = () => {
   const { id } = useSelector((state) => state.auth.me);
   const singleUser = useSelector(selectSingleUser);
 
+  /**
+   * function that calculates random tax amount
+   * @returns number fixed to two decimals
+   */
   const estimateTax = () => {
     const tax = (orderTotal() / 100) * 10;
     return tax.toFixed(2);
   };
 
+  /**
+   * function that calculates the order subtotal
+   * @returns number
+   */
   const orderTotal = () => {
     let prices = [];
     cart.forEach((orderItem) => {
@@ -41,11 +53,16 @@ const Checkout = () => {
     return total;
   };
 
+  /**
+   * function that calculates the total
+   * @returns number fixed to two decimals
+   */
   const total = () => {
     const total = Number(estimateTax()) + orderTotal();
     return total.toFixed(2);
   };
 
+  // fetches items on load
   useEffect(() => {
     if (!isLoggedIn) {
       dispatch(fetchItems());
@@ -60,6 +77,7 @@ const Checkout = () => {
     setStripeToken(token);
   };
 
+  // stripe integration through an ajax database request
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -75,6 +93,8 @@ const Checkout = () => {
     stripeToken && makeRequest();
   }, [stripeToken]);
 
+  // function that creates or updates a user based on the provided email
+  // then creates an order for the guest or user
   const checkout = async (res, stripeToken) => {
     await dispatch(
       createOrUpdateUser({

@@ -1,7 +1,11 @@
+// demo data to seed database with puzzledata
 const {
   models: { Puzzle },
 } = require("../server/db");
 
+/**
+ * function that creates 45 puzzle objects in the database
+ */
 const seedPuzzles = async () => {
   try {
     ///Puzzle data

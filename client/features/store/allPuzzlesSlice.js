@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-//initialize empty array to put puzzles in
-
 //async thunk communicates with db to retrieve all puzzles
 export const fetchPuzzles = createAsyncThunk("puzzles/allPuzzles", async () => {
   try {
@@ -22,22 +20,6 @@ export const deletePuzzleAsync = createAsyncThunk(
   }
 );
 
-//async thunk to update product in database
-// export const updateSinglePuzzle = createAsyncThunk(
-//   'updatePuzzle',
-//   async (puzzleData) => {
-//     try {
-//       const { data } = await axios.put(
-//         `/api/puzzles/$(puzzleData.id)`,
-//         puzzleData
-//       );
-//       return data;
-//     }catch(err) {
-//       console.error(err)
-//     }
-//   }
-// );
-
 export const allPuzzlesSlice = createSlice({
   name: "puzzles",
   initialState: [],
@@ -50,6 +32,11 @@ export const allPuzzlesSlice = createSlice({
   },
 });
 
+/**
+ * selector function that allows us to access state by dispatching an action to the store
+ * @param {[]} state puzzle array
+ * @returns the puzzles stored in state
+ */
 export const selectPuzzles = (state) => {
   return state.puzzles;
 };

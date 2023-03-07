@@ -12,22 +12,25 @@ import {
 import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
 
-//needs to pass down cart(Order) and userId on Nav
-
+/**
+ * Component for the cart
+ * @component shows usercart/guestcart
+ */
 const Cart = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const cart = useSelector(selectOrder) || [];
   const { id } = useSelector((state) => state.auth.me);
 
+  //fetches items for the local or usercart and merges them if necessary
   useEffect(() => {
     if (!id) {
       dispatch(fetchItems());
     } else {
       const localCart = JSON.parse(localStorage.getItem("order"));
-      if (localCart.length > 0) {
+      if (localCart && localCart.length) {
         //add all local items into user cart
-        for (const item of cart) {
+        for (const item of localCart) {
           dispatch(
             addOrderItems({
               id,
@@ -44,6 +47,7 @@ const Cart = () => {
     }
   }, [dispatch, id]);
 
+  // function that updates ordertotal based on what elements are in the cart
   const orderTotal = () => {
     let prices = [];
     cart.forEach((orderItem) => {
@@ -56,16 +60,23 @@ const Cart = () => {
     return total;
   };
 
+  // function that estimates tax
   const estimateTax = () => {
     const tax = (orderTotal() / 100) * 10;
     return tax.toFixed(2);
   };
-
+  // function that calculates the complete total
   const total = () => {
     const total = Number(estimateTax()) + orderTotal();
     return total.toFixed(2);
   };
 
+  /**
+   * Click event handler
+   * @param {onClick} event
+   * @fires when clear cart is clickes
+   * @dispatches an action to the Redux store to clear the entire cart
+   */
   const handleClear = async () => {
     if (!id) {
       dispatch(clearItems());
@@ -74,8 +85,12 @@ const Cart = () => {
     }
   };
 
+  /**
+   * Click event handler
+   * @param {onClick} event
+   * @fires when continue to purchase is clickes
+   */
   const handleNav = () => {
-    //also pass down user Id through Navigate
     Navigate("/cart/checkout");
   };
 
@@ -96,7 +111,7 @@ const Cart = () => {
       <div className={styles.container}>
         <div className={styles.leftSide}>
           <h1 className={styles.cartHeader}>
-            There are {cart.length} item(s) in your cart.
+            There are {cart?.length} item(s) in your cart.
           </h1>
           <section className={styles.itemsLeft}>
             <div className={styles.banner}>

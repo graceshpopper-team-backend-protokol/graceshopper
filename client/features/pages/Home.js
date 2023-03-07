@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { fetchPuzzles } from "../store/allPuzzlesSlice";
 import styles from "../styles/Home.module.css";
 
+/**
+ * Component for the homepage
+ * @component shows a page with randomly generated staffpicks and featured puzzles
+ */
 function PuzzleDisplay({ puzzles }) {
   if (!puzzles) {
     return <div>Loading puzzles...</div>;

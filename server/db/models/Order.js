@@ -1,3 +1,6 @@
+// Order model that includes date, orderTotal and status
+// if the status is pending the order is a cart - if the status is ordered the user has placed the order
+
 const Sequelize = require("sequelize");
 const db = require("../db");
 

@@ -1,31 +1,31 @@
-  
-  .container button {
-    border: none;
-    background-color: mediumaquamarine;
-    color: white;
-    height: 40px;
-    width: 75px;
-    margin-right: 4rem;
-    border-radius: 5px;
-  }
-  
-  .container h1 {
-    font-family: 'Righteous', cursive;
-    font-size: 38px;
-    text-align: center;
-    color: black;
-  }
-  .container a {
-    color: black;
-  }
+/* styling for all puzzles on shop page */
+.container button {
+  border: none;
+  background-color: mediumaquamarine;
+  color: white;
+  height: 40px;
+  width: 75px;
+  margin-right: 4rem;
+  border-radius: 5px;
+}
 
-  .puzzles {
-    display: inline-flex;
-    flex-wrap: wrap;
-    flex: 33.33%;
-    padding: 5px;
-    justify-content: center;
-    align-items: center;
-    gap: 8rem;
-    text-align: center;
-  }
+.container h1 {
+  font-family: "Righteous", cursive;
+  font-size: 38px;
+  text-align: center;
+  color: black;
+}
+.container a {
+  color: black;
+}
+
+.puzzles {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex: 33.33%;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+  text-align: center;
+}
