@@ -35,7 +35,7 @@ const PuzzleCard = ({ puzzle }) => {
         <div className="cardText">
           <h1>{puzzle.name}</h1>
           <p>{puzzle.puzzlePieces}</p>
-          <p>{puzzle.price}</p>
+          <p>${puzzle.price}</p>
         </div>
       </Link>
       <button onClick={() => handleAdd(puzzle.id)}>
