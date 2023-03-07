@@ -122,6 +122,7 @@ const EditPuzzle = () => {
                     onChange={(event) => (setStripeId(event.target.value))}
                 ></input>
                 <br></br>
+                
                 <button type='submit'>Submit Changes</button>
             </form>
         </div>
