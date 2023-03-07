@@ -7,6 +7,7 @@ import {
   fetchOrderItems,
   selectOrder,
   clearItems,
+  addOrderItems,
 } from "../store/orderSlice.js";
 import styles from "../styles/Cart.module.css";
 import OrderItemRow from "../components/OrderItemRow.js";
@@ -16,14 +17,30 @@ import OrderItemRow from "../components/OrderItemRow.js";
 const Cart = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  const cart = useSelector(selectOrder);
+  const cart = useSelector(selectOrder) || [];
   const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
     if (!id) {
       dispatch(fetchItems());
     } else {
-      dispatch(fetchOrderItems(id));
+      const localCart = JSON.parse(localStorage.getItem("order"));
+      if (localCart.length > 0) {
+        //add all local items into user cart
+        for (const item of cart) {
+          dispatch(
+            addOrderItems({
+              id,
+              puzzleId: item.puzzleId,
+              orderQTY: item.orderQTY,
+            })
+          );
+        }
+        localStorage.removeItem("order");
+        dispatch(fetchOrderItems(id));
+      } else {
+        dispatch(fetchOrderItems(id));
+      }
     }
   }, [dispatch, id]);
 
