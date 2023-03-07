@@ -1,0 +1,40 @@
+.container {
+  width: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 1px grey solid;
+  border-bottom: 1px grey solid;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-left: 2rem;
+  font-size: .75rem;
+}
+
+.container img {
+  width: 8rem;
+  height: 10rem;
+  border: 2px black solid;
+}
+
+.container input {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.leftText {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.container button {
+  height:2.25rem;
+  background-color: mediumaquamarine;
+  color: white;
+  border: none;
+}
+
+.name {
+  font-family: 'Righteous', cursive;
+}
