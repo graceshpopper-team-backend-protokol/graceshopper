@@ -116,6 +116,7 @@ const AddPuzzle = () => {
                     value={stripeId}
                     onChange={(event) => (setStripeId(event.target.value))}
                 ></input>
+                <br></br>
                 <button type='submit'>Submit New Puzzle</button>
             </form>
         </div>
