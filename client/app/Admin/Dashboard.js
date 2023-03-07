@@ -24,11 +24,12 @@ const Dashboard = () => {
     <div>
       <div className={styles.dashboard}>
       <h1>Dashboard</h1>
+        <hr/>
         <Link to={`/dashboard/users`}>View Users</Link>
         <div className={styles.addPuzzle}>
         <AddPuzzle />
         </div>
-                <br></br>
+                <hr/>
                 <h3>Edit Existing Puzzles</h3>
                 <ol>
                 {puzzles.map((puzzle) => {
