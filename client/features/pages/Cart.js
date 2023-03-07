@@ -82,58 +82,70 @@ const Cart = () => {
   const RenderCart = () => {
     if (!cart.length) {
       return (
-        <div>
-          <h1>Your cart is empty.</h1>
-          <Link to="/products">
-            <h2>Take a look at our curated puzzles to fill it up!</h2>
-          </Link>
+        <div className={styles.emptyContainer}>
+          <div className={styles.emptyContent}>
+            <h1 className={styles.cartHeaderEmpty}>Your cart is empty.</h1>
+            <Link to="/products">
+              <h2>Take a look at our curated puzzles to fill it up!</h2>
+            </Link>
+          </div>
         </div>
       );
     }
     return (
-      <div>
-        <h1>There are {cart.length} item(s) in your cart.</h1>
-        <section className={styles.itemsLeft}>
-          <div className={styles.banner}>
-            <h2>Puzzle</h2>
-            <h2>Puzzle Price</h2>
-            <h2>Quantity</h2>
-            <h2>Total Price</h2>
-          </div>
-          <section className={styles.items}>
-            {cart.map((orderItem) => {
-              return (
-                <OrderItemRow
-                  key={orderItem.id}
-                  id={orderItem.id}
-                  orderItem={orderItem}
-                />
-              );
-            })}
+      <div className={styles.container}>
+        <div className={styles.leftSide}>
+          <h1 className={styles.cartHeader}>
+            There are {cart.length} item(s) in your cart.
+          </h1>
+          <section className={styles.itemsLeft}>
+            <div className={styles.banner}>
+              <h2>Puzzle</h2>
+              <h2>Puzzle Price</h2>
+              <h2>Quantity</h2>
+              <h2>Total Price</h2>
+            </div>
+            <section className={styles.items}>
+              {cart.map((orderItem) => {
+                return (
+                  <OrderItemRow
+                    key={orderItem.id}
+                    id={orderItem.id}
+                    orderItem={orderItem}
+                  />
+                );
+              })}
+            </section>
           </section>
-        </section>
+        </div>
         <section className={styles.summaryRight}>
           <h1>Order Summary</h1>
           <div className={styles.infoContainer}>
-            <div>
+            <div className={styles.sums}>
               <span>Subtotal:</span>
               <span>${orderTotal()}</span>
             </div>
-            <div>
+            <div className={styles.sums}>
               <span>Shipping:</span>
               <span>FREE</span>
             </div>
-            <div>
+            <div className={styles.sums}>
               <span>Estimated Tax:</span>
               <span>${estimateTax()}</span>
             </div>
-            <div>
-              <span>Total</span>
-              <span>${total()}</span>
+            <div className={styles.sums}>
+              <span>
+                <b>Total</b>
+              </span>
+              <span>
+                <b>${total()}</b>
+              </span>
             </div>
           </div>
-          <button onClick={handleNav}>Proceed to Checkout</button>
-          <button onClick={handleClear}>Clear Cart</button>
+          <div className={styles.buttons}>
+            <button onClick={handleNav}>Proceed to Checkout</button>
+            <button onClick={handleClear}>Clear Cart</button>
+          </div>
         </section>
       </div>
     );
