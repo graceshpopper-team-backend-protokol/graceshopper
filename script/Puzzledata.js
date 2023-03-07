@@ -238,7 +238,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "500 pieces",
       price: 15.99,
-      imgURL: "https://picsum.photos/id/95/300/200",
+      imgURL: "https://picsum.photos/id/169/300/200",
       stripeId: "prod_NSaNbtH2G6ZZBj",
     });
 
@@ -397,7 +397,7 @@ const seedPuzzles = async () => {
       stockQuantity: 15,
       puzzlePieces: "1000 pieces",
       price: 19.99,
-      imgURL: "https://picsum.photos/id/95/300/200",
+      imgURL: "https://picsum.photos/id/169/300/200",
       stripeId: "prod_NSaar9vePhCBcH",
     });
 
