@@ -14,14 +14,15 @@ import Confirmation from "../features/pages/Confirmation";
 import EditPuzzle from "./Admin/EditPuzzle";
 
 /**
- * COMPONENT
+ * Component for all approutes
+ * @component contains logic which routes are accesible based on the user status (logged in/logged in as admin/not logged in)
  */
-
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
   const dispatch = useDispatch();
 
+  // dipatches authentication and retrieves token once when component mounts
   useEffect(() => {
     dispatch(me());
   }, []);

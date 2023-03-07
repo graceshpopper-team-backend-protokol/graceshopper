@@ -1,27 +1,27 @@
+/* styling for dashboard component */
 .dashboard {
   margin: 2rem;
   display: flex-flow;
-
-  }
+}
 .text h1 {
-    font-family: 'Righteous', cursive;
-    font-size: 2.5rem;
-    text-align: center;
-  }
+  font-family: "Righteous", cursive;
+  font-size: 2.5rem;
+  text-align: center;
+}
 
 .addPuzzle {
-    display: flex;
-    height: 100%;
-    width: 30rem;
-    flex-direction: column;
-  }
+  display: flex;
+  height: 100%;
+  width: 30rem;
+  flex-direction: column;
+}
 
 .listings {
-    display: block;
-    padding: 2.5rem;
-    border: dotted black;
-  }
+  display: block;
+  padding: 2.5rem;
+  border: dotted black;
+}
 
 hr {
-    border-top: 0.3em solid mediumaquamarine;
+  border-top: 0.3em solid mediumaquamarine;
 }

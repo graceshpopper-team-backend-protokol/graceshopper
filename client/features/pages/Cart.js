@@ -80,7 +80,7 @@ const Cart = () => {
   };
 
   const RenderCart = () => {
-    if (!cart && !cart.length) {
+    if (!cart.length) {
       return (
         <div>
           <h1>Your cart is empty.</h1>

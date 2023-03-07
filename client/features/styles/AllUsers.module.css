@@ -1,22 +1,23 @@
+/* styles for All Users page on admin dashboard */
 .container {
-    height: 100%;
-    width: 100%;
-    /* display: flex; */
-    justify-content: left;
-    margin: 2rem;
-    margin-top: 3rem;
-  }
+  height: 100%;
+  width: 100%;
+  /* display: flex; */
+  justify-content: left;
+  margin: 2rem;
+  margin-top: 3rem;
+}
 
 .userMap {
-    display: block;
-    margin: 0;
-  }
+  display: block;
+  margin: 0;
+}
 
 hr {
-    border-top: 0.1em solid mediumaquamarine;
+  border-top: 0.1em solid mediumaquamarine;
 }
 
 .text h1 {
-    font-family: 'Righteous', cursive;
-    font-size: 2.5rem;
-  }
+  font-family: "Righteous", cursive;
+  font-size: 2.5rem;
+}

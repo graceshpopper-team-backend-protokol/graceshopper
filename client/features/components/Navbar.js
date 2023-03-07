@@ -5,7 +5,6 @@ import { logout } from "../../app/store";
 
 import styles from "../styles/Navbar.module.css";
 
-
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
@@ -18,7 +17,6 @@ const Navbar = () => {
 
   return (
     <div>
-      
       <nav>
         {isLoggedIn ? (
           isAdmin ? (
@@ -35,7 +33,11 @@ const Navbar = () => {
               <Link to="/dashboard" className="navLink">
                 Dashboard
               </Link>
-              <button className={styles.logOut} type="button" onClick={logoutAndRedirectHome}>
+              <button
+                className={styles.logOut}
+                type="button"
+                onClick={logoutAndRedirectHome}
+              >
                 Logout
               </button>
             </div>
@@ -56,7 +58,7 @@ const Navbar = () => {
             </div>
           )
         ) : (
-          <div >
+          <div className={styles.container}>
             {/* The navbar will show these links before you log in */}
             <h1>Backend Protokol Puzzles</h1>
             <Link to="/home">Home</Link>

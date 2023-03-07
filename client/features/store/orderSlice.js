@@ -97,19 +97,22 @@ export const orderSlice = createSlice({
     addItems(state, { payload }) {
       fetchItems();
       //we use findIndex to determine if we already have that item in the cart
-
-      const idx = state?.findIndex(
-        (orderItem) => orderItem.puzzleId === payload.puzzleId
-      );
-
-      //if it exists, we increment the cart quantity
-      if (idx !== -1) {
-        const currentOrderQTY = state[idx].orderQTY;
-        state[idx].orderQTY =
-          Number(currentOrderQTY) + Number(payload.orderQTY);
-        localStorage.setItem("order", JSON.stringify(state));
+      if (state.length) {
+        const idx = state.findIndex(
+          (orderItem) => orderItem.puzzleId === payload.puzzleId
+        );
+        //if it exists, we increment the cart quantity
+        if (idx !== -1) {
+          const currentOrderQTY = state[idx].orderQTY;
+          state[idx].orderQTY =
+            Number(currentOrderQTY) + Number(payload.orderQTY);
+          localStorage.setItem("order", JSON.stringify(state));
+        } else {
+          //if it doesn't exist add it to state
+          state.push(payload);
+          localStorage.setItem("order", JSON.stringify(state));
+        }
       } else {
-        //if it doesn't exist add it to state
         state.push(payload);
         localStorage.setItem("order", JSON.stringify(state));
       }
