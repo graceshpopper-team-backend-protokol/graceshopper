@@ -15,7 +15,7 @@ const AllPuzzles = (props) => {
   return (
     <div className={styles.container}>
       <h1>All Puzzles</h1>
-      <div className="puzzles">
+      <div className={styles.puzzles}>
         {puzzles.map((puzzle) => {
           return <PuzzleCard key={puzzle.id} id={puzzle.id} puzzle={puzzle} />;
         })}
