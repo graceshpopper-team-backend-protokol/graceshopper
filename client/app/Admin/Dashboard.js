@@ -51,7 +51,7 @@ const Dashboard = () => {
                   );
                 })}
                 </ol>
-               <div>
+               </div>
     </div>
   );
 };
