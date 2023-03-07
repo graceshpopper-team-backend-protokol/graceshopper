@@ -97,10 +97,10 @@ export const orderSlice = createSlice({
     },
     // adds items for not logged in users
     addItems(state, { payload }) {
-      fetchItems();
+      const localCart = JSON.parse(localStorage.getItem("order"));
       //we use findIndex to determine if we already have that item in the cart
-      if (state.length) {
-        const idx = state.findIndex(
+      if (localCart && localCart.length) {
+        const idx = localCart.findIndex(
           (orderItem) => orderItem.puzzleId === payload.puzzleId
         );
         //if it exists, we increment the cart quantity
