@@ -101,19 +101,19 @@ const Checkout = () => {
       <section className={styles.summaryRight}>
         <h1>Order Summary</h1>
         <div className={styles.infoContainer}>
-          <div>
+          <div className={styles.sums}>
             <span>Subtotal:</span>
             {orderTotal()}
           </div>
-          <div>
+          <div className={styles.sums}>
             <span>Shipping:</span>
             <span>FREE</span>
           </div>
-          <div>
+          <div className={styles.sums}>
             <span>Estimated Tax:</span>
             <span>${estimateTax()}</span>
           </div>
-          <div>
+          <div className={styles.sums}>
             <span>Total:</span>
             <span>${total()}</span>
           </div>
