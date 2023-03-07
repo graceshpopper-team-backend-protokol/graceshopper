@@ -90,10 +90,12 @@ export const orderSlice = createSlice({
   name: "order",
   initialState: [],
   reducers: {
+    // fetches items for not logged in users
     fetchItems(state, { payload }) {
       const localCart = JSON.parse(localStorage.getItem("order"));
       return localCart;
     },
+    // adds items for not logged in users
     addItems(state, { payload }) {
       fetchItems();
       //we use findIndex to determine if we already have that item in the cart
@@ -117,6 +119,7 @@ export const orderSlice = createSlice({
         localStorage.setItem("order", JSON.stringify(state));
       }
     },
+    // edits items for not logged in users
     editItems(state, { payload }) {
       const idx = state.findIndex(
         (orderItem) => orderItem.puzzleId === payload.puzzleId
@@ -129,6 +132,7 @@ export const orderSlice = createSlice({
         localStorage.setItem("order", JSON.stringify(state));
       }
     },
+    // clears cart for not logged in users
     clearItems(state, { payload }) {
       localStorage.clear();
       return [];
@@ -159,8 +163,14 @@ export const orderSlice = createSlice({
   },
 });
 
+/**
+ * selector function that allows us to access state by dispatching an action to the store
+ * @param {[]} state cart array
+ * @returns the orderItems stored in state
+ */
 export const selectOrder = (state) => state.order;
 
+// exporting all regular reducers to be useable in React components
 export const { fetchItems, addItems, editItems, clearItems } =
   orderSlice.actions;
 

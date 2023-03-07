@@ -1,19 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-/*
-  CONSTANT VARIABLES
-*/
-const TOKEN = 'token';
-
-/*
-  THUNKS
-*/
-export const me = createAsyncThunk('auth/me', async () => {
-  const token = window.localStorage.getItem(TOKEN);
+/**
+ * async thunk that authorizes a user through an AJAX request
+ * receives the token from local storage when user is logged in
+ * @returns authentication confirmation
+ * @catches error if database request goes wrong
+ */
+export const me = createAsyncThunk("auth/me", async () => {
+  const token = window.localStorage.getItem("token");
   try {
     if (token) {
-      const res = await axios.get('/auth/me', {
+      const res = await axios.get("/auth/me", {
         headers: {
           authorization: token,
         },
@@ -26,13 +24,19 @@ export const me = createAsyncThunk('auth/me', async () => {
     if (err.response.data) {
       return thunkAPI.rejectWithValue(err.response.data);
     } else {
-      return 'There was an issue with your request.';
+      return "There was an issue with your request.";
     }
   }
 });
 
+/**
+ * async thunk that authenticates a user through an AJAX request
+ * @param {object} userInfo to send to the database to create a new user
+ * creates a token
+ * @catches error if database request goes wrong
+ */
 export const authenticate = createAsyncThunk(
-  'auth/authenticate',
+  "auth/authenticate",
   async ({ username, password, method }, thunkAPI) => {
     try {
       const res = await axios.post(`/auth/${method}`, { username, password });
@@ -42,17 +46,21 @@ export const authenticate = createAsyncThunk(
       if (err.response.data) {
         return thunkAPI.rejectWithValue(err.response.data);
       } else {
-        return 'There was an issue with your request.';
+        return "There was an issue with your request.";
       }
     }
   }
 );
 
-/*
-  SLICE
-*/
+/**
+ * authentication slice
+ * initialState is set as an object with me object and error
+ * a regular reducer is used whenever a user logs out
+ * fetchStudents returns our entire student array we received from the database
+ * all reducers are setting AJAX responses as state
+ */
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     me: {},
     error: null,
@@ -78,11 +86,11 @@ export const authSlice = createSlice({
 });
 
 /*
-  ACTIONS
-*/
+ * logout reducer is now useable on the frontend
+ */
 export const { logout } = authSlice.actions;
 
 /*
-  REDUCER
+exporting the authSlice
 */
 export default authSlice.reducer;

@@ -3,8 +3,12 @@ import axios from "axios";
 
 const initialState = {};
 
-//async thunk communicates with db to get user with matching ID
-
+/**
+ * async thunk that fetches single user
+ * @param {number} user id to request that specific user from the database
+ * @returns user data it received from the AJAX request
+ * @catches error if database request goes wrong
+ */
 export const fetchSingleUser = createAsyncThunk("singleUser", async (id) => {
   try {
     const { data } = await axios.get(`/api/users/${id}`);
@@ -14,6 +18,12 @@ export const fetchSingleUser = createAsyncThunk("singleUser", async (id) => {
   }
 });
 
+/**
+ * async thunk that updates a single user
+ * @param {object} userdata - to update user on backend
+ * @returns user data it received from the AJAX request
+ * @catches error if database request goes wrong
+ */
 export const editUser = createAsyncThunk(
   "users/editUser",
   async ({ id, username, password, firstName, lastName, address }) => {
@@ -25,7 +35,6 @@ export const editUser = createAsyncThunk(
         lastName,
         address,
       });
-      console.log("After axios put");
       return data;
     } catch (err) {
       console.log(err);
@@ -33,6 +42,12 @@ export const editUser = createAsyncThunk(
   }
 );
 
+/**
+ * async thunk that creates or updates a single user
+ * @param {object} userInfo - to update or create user on backend
+ * @returns user data it received from the AJAX request
+ * @catches error if database request goes wrong
+ */
 export const createOrUpdateUser = createAsyncThunk(
   "users/createOrUpdateUser",
   async (userInfo) => {
@@ -48,6 +63,12 @@ export const createOrUpdateUser = createAsyncThunk(
   }
 );
 
+/**
+ * singleUser slice
+ * initialState is set as an empty object
+ * our async reducers are firing whenever our async thunks fulfill the request
+ * all fulfilled requests are being set as the new state
+ */
 export const singleUserSlice = createSlice({
   name: "singleUser",
   initialState,
@@ -65,6 +86,11 @@ export const singleUserSlice = createSlice({
   },
 });
 
+/**
+ * selector function that allows us to access state by dispatching an action to the store
+ * @param {object} state user object
+ * @returns the user stored in state
+ */
 export const selectSingleUser = (state) => {
   return state.singleUser;
 };

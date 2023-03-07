@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "../styles/UserCard.module.css";
 
+/**
+ * Component for a userrow in the admin dashboard
+ * @component shows userdata for a single user
+ */
 const UserCard = ({ user }) => {
   return (
     <div className={styles.container}>

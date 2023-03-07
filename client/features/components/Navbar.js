@@ -5,6 +5,10 @@ import { logout } from "../../app/store";
 
 import styles from "../styles/Navbar.module.css";
 
+/**
+ * Component for the navbar
+ * @component shows a navbar that updates links based on userstatus
+ */
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const isAdmin = useSelector((state) => !!state.auth.me.isAdmin);
