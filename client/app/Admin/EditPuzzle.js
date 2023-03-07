@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { selectSinglePuzzle, fetchSinglePuzzle, updateSinglePuzzle } from '../../features/store/singlePuzzleSlice';
+import styles from "../../features/styles/EditPuzzle.module.css";
 
 
 const EditPuzzle = () => {
@@ -44,11 +45,11 @@ const EditPuzzle = () => {
     }
 
     return (
-        <div id='edit-puzzles'>
+        <div className={styles.container}>
             <h1>Current Puzzle</h1>
-            <Link to='/dashboard'>Return to Dashboard</Link>
+            {/* <Link to='/dashboard'>Return to Dashboard</Link> */}
 
-            <form id='puzzle-form' onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <h3>Edit Puzzle Information:</h3>
 
                 <label htmlFor='puzzleName'>
@@ -120,6 +121,7 @@ const EditPuzzle = () => {
                     value={stripeId}
                     onChange={(event) => (setStripeId(event.target.value))}
                 ></input>
+                <br></br>
                 <button type='submit'>Submit Changes</button>
             </form>
         </div>
