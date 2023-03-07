@@ -84,14 +84,13 @@ const OrderItemCard = ({ orderItem }) => {
 
   return (
     <div className={styles.container}>
-      <img src={puzzle.imgURl} className={styles.image} />
+      <img src={puzzle.imgURL} className={styles.image} />
       <div className={styles.leftText}>
-        <h2>{puzzle.name}</h2>
+        <h2 className={styles.name}>{puzzle.name}</h2>
         <p>Size: {puzzle.puzzlePieces}</p>
       </div>
       <h2>${puzzle.price}</h2>
       <form className={styles.quantity}>
-        <label htmlFor="quantity">Quantity</label>
         <input
           name="quantity"
           type="number"

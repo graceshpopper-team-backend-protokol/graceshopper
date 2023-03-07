@@ -39,7 +39,8 @@ const Dashboard = () => {
       <div className={styles.dashboard}>
         <h1>Dashboard</h1>
         <hr />
-        <Link to={`/dashboard/users`}>View Users</Link>
+        <br />
+        <Link to={`/dashboard/users`}>Click Here to View All Users</Link>
         <div className={styles.addPuzzle}>
           <AddPuzzle />
         </div>
