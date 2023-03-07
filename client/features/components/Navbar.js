@@ -18,13 +18,13 @@ const Navbar = () => {
 
   return (
     <div>
-
-      <h1>Backend Protokol Puzzles</h1>
+      
       <nav>
         {isLoggedIn ? (
           isAdmin ? (
-            <div>
+            <div className={styles.container}>
               {/* The navbar will show these links after Admin is logged in */}
+              <h1>Backend Protokol Puzzles</h1>
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
                 Shop
@@ -35,13 +35,14 @@ const Navbar = () => {
               <Link to="/dashboard" className="navLink">
                 Dashboard
               </Link>
-              <button type="button" onClick={logoutAndRedirectHome}>
+              <button className={styles.logOut} type="button" onClick={logoutAndRedirectHome}>
                 Logout
               </button>
             </div>
           ) : (
-            <div>
+            <div className={styles.container}>
               {/* The navbar will show these links after User is logged in */}
+              <h1>Backend Protokol Puzzles</h1>
               <Link to="/home">Home</Link>
               <Link to="/puzzles" className="navLink">
                 Shop
@@ -57,6 +58,7 @@ const Navbar = () => {
         ) : (
           <div >
             {/* The navbar will show these links before you log in */}
+            <h1>Backend Protokol Puzzles</h1>
             <Link to="/home">Home</Link>
             <Link to="/puzzles" className="navLink">
               Shop
@@ -67,7 +69,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   );
 };
