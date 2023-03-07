@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPuzzles, selectPuzzles } from '../../features/store/allPuzzlesSlice';
 import { deletePuzzleAsync } from '../../features/store/allPuzzlesSlice';
