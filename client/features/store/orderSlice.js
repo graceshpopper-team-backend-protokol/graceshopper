@@ -93,14 +93,18 @@ export const orderSlice = createSlice({
     // fetches items for not logged in users
     fetchItems(state, { payload }) {
       const localCart = JSON.parse(localStorage.getItem("order"));
-      return localCart;
+      if (!localCart) {
+        return [];
+      } else {
+        return localCart;
+      }
     },
     // adds items for not logged in users
     addItems(state, { payload }) {
-      const localCart = JSON.parse(localStorage.getItem("order"));
+      fetchItems();
       //we use findIndex to determine if we already have that item in the cart
-      if (localCart && localCart.length) {
-        const idx = localCart.findIndex(
+      if (state && state.length) {
+        const idx = state.findIndex(
           (orderItem) => orderItem.puzzleId === payload.puzzleId
         );
         //if it exists, we increment the cart quantity
@@ -115,6 +119,7 @@ export const orderSlice = createSlice({
           localStorage.setItem("order", JSON.stringify(state));
         }
       } else {
+        state = [];
         state.push(payload);
         localStorage.setItem("order", JSON.stringify(state));
       }
@@ -122,13 +127,14 @@ export const orderSlice = createSlice({
     // edits items for not logged in users
     editItems(state, { payload }) {
       const idx = state.findIndex(
-        (orderItem) => orderItem.puzzleId === payload.puzzleId
+        (orderItem) => Number(orderItem.puzzleId) === payload.puzzleId
       );
-      if (Number(payload.orderQTY) === 0) {
+      const newQty = payload.orderQTY;
+      if (newQty === 0) {
         state.splice(idx, 1);
         localStorage.setItem("order", JSON.stringify(state));
       } else {
-        state[idx].orderQTY = Number(payload.orderQTY);
+        state[idx] = payload;
         localStorage.setItem("order", JSON.stringify(state));
       }
     },
