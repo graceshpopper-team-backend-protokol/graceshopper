@@ -108,9 +108,9 @@ const Cart = () => {
       );
     }
     return (
-      <div>
-        <h1>You have {cart.length} item(s) in your cart.</h1>
+      <div className={styles.container}>
         <section className={styles.itemsLeft}>
+        <h1 className={styles.cartHeader}>You have {cart.length} item(s) in your cart.</h1>
           <div className={styles.banner}>
             <h2>Puzzle</h2>
             <h2>Puzzle Price</h2>

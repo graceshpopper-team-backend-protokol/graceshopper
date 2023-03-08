@@ -15,10 +15,11 @@
 .container {
   display: flex;
   align-items: center;
+
 }
 
 .cartHeader {
-  margin: 4rem;
+  margin: 3rem;
   font-family: 'Righteous', cursive;
 }
 
