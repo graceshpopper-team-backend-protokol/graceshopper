@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authenticate } from "../../app/store";
+import styles from "../styles/Login.module.css"
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -27,7 +28,7 @@ const AuthForm = ({ name, displayName }) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">

@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding-left: 2rem;
     padding-right: 2rem;
     margin-top: 5rem;
@@ -10,6 +10,7 @@
     font-family: 'Righteous', cursive;
     font-size: 38px;
     text-align: center; 
+    padding: 1rem;
 }
 
 .container a {
@@ -26,3 +27,5 @@
     margin-right: 4rem;
     border-radius: 5px;
   }
+
+

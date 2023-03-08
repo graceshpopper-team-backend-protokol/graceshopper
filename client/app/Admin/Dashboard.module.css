@@ -29,3 +29,13 @@ hr {
 .viewUsers {
   font-weight: 700;
 }
+.dashboard a {
+  color: darkcyan;
+}
+
+.dashboard button {
+  border: none;
+  background-color: mediumaquamarine;
+  color: white;
+  border-radius: 5px;
+}
