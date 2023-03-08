@@ -65,6 +65,11 @@
   font-weight: bold;
 }
 
+.addToCart button:active {
+  background-color: rgb(214, 252, 69);
+  color: mediumaquamarine;
+}
+
 .line {
   width: 70%;
   margin-top: 6rem;

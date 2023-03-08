@@ -46,10 +46,9 @@ const EditPuzzle = () => {
 
     return (
         <div className={styles.container}>
-            <h1>Current Puzzle</h1>
-            {/* <Link to='/dashboard'>Return to Dashboard</Link> */}
-
+            
             <form onSubmit={handleSubmit}>
+                <h1>Current Puzzle</h1>
                 <h3>Edit Puzzle Information:</h3>
 
                 <label htmlFor='puzzleName'>

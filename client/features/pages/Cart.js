@@ -109,7 +109,7 @@ const Cart = () => {
     }
     return (
       <div>
-        <h1>There are {cart.length} item(s) in your cart.</h1>
+        <h1>You have {cart.length} item(s) in your cart.</h1>
         <section className={styles.itemsLeft}>
           <div className={styles.banner}>
             <h2>Puzzle</h2>

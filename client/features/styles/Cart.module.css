@@ -40,7 +40,10 @@
   text-decoration: underline;
 
 }
-
+.items button {
+  border-radius: 5px;
+  margin-left: 1rem;
+}
 .infoContainer {
   display: flex;
   flex-direction: column;
@@ -56,6 +59,7 @@
   height: 2.5rem;
   border: white 2px solid;
   background-color: rgba(176,255,171,1);
+  border-radius: 5px;
 }
 
 .buttons {
