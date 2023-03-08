@@ -11,7 +11,7 @@ import { editOrderItems, editItems } from "../store/orderSlice";
 const OrderItemCard = ({ orderItem }) => {
   const puzzle = orderItem.puzzle;
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(orderItem.orderQTY);
+  const [quantity, setQuantity] = useState(0);
   const { id } = useSelector((state) => state.auth.me);
 
   // sets quantity state based on the prop passed
@@ -30,7 +30,7 @@ const OrderItemCard = ({ orderItem }) => {
    * @fires when quantity is changed
    * sets state
    */
-  const handleQtyChange = async (ev) => {
+  const handleQtyChange = (ev) => {
     ev.preventDefault();
     setQuantity(ev.target.value);
   };
@@ -41,9 +41,12 @@ const OrderItemCard = ({ orderItem }) => {
    * @fires when update button is clicked
    * @dispatches an action to the Redux store that changes the orderQTY on the orderItem
    */
-  const handleEdit = async () => {
+  const handleEdit = async (ev) => {
+    ev.preventDefault();
     if (!id) {
-      dispatch(editItems({ puzzleId: puzzle.id, orderQTY: quantity }));
+      await dispatch(
+        editItems({ puzzleId: puzzle.id, orderQTY: Number(quantity), puzzle })
+      );
     } else {
       if (quantity > 0) {
         await dispatch(
@@ -94,7 +97,7 @@ const OrderItemCard = ({ orderItem }) => {
         <input
           name="quantity"
           type="number"
-          defaultValue={orderItem.orderQTY}
+          value={quantity}
           onChange={handleQtyChange}
         />
         <button onClick={handleEdit}>Update</button>
